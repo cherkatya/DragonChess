@@ -18,9 +18,9 @@ public class Field {
     public boolean isEmpty(FieldCoordinate coords){
         return field[coords.getBoard()][coords.getY()][coords.getX()] == null;
     }
-    public void makeMove(FieldCoordinate oldPosition, FieldCoordinate newPosition){
-        if(!isEmpty(oldPosition)) {
-            setFigure(getFigure(oldPosition), newPosition);
+    public void makeMove(GameMove gameMove){
+        if(!isEmpty(gameMove.getOldPosition())) {
+            setFigure(getFigure(gameMove.getOldPosition()), gameMove.getNewPosition());
         }
     }
     public void populate(){

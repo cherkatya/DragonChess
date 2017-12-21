@@ -27,7 +27,6 @@ public class Sylph extends Figure {
                 possibleMoves.add(new FieldCoordinate(0, 6, x));
             }
         }
-        checkPossibilityMoves(possibleMoves, field);
     }
 
     public List<FieldCoordinate> getPossibleMoves(Field field, FieldCoordinate coords){
@@ -40,10 +39,12 @@ public class Sylph extends Figure {
                 possibleMoves.add(new FieldCoordinate(coords.getBoard(), coords.getY() - 1, coords.getX() - 1));
                 possibleMoves.add(new FieldCoordinate(coords.getBoard(), coords.getY() - 1, coords.getX() + 1));
             }
-            checkPossibilityMoves(possibleMoves, field);
         }
         if(coords.getBoard() == 1)
             addSecondBoardMoves(possibleMoves, coords, field);
+
+        checkMoveValidity(possibleMoves, field, team);
+        checkPossibilityMoves(possibleMoves, field);
 
         return possibleMoves;
     }
@@ -58,7 +59,10 @@ public class Sylph extends Figure {
             }
             captureMoves.add(new FieldCoordinate(coords.getBoard() + 1, coords.getY(), coords.getX()));
         }
+
+        checkMoveValidity(captureMoves, field, team);
         checkCaptureMoves(captureMoves, field);
+
         return captureMoves;
     }
 }

@@ -16,7 +16,7 @@ public class Griffon extends Figure {
         super(team);
     }
 
-    private List<FieldCoordinate> getBothMoves(FieldCoordinate coords){
+    private List<FieldCoordinate> getBothMoves(FieldCoordinate coords, Field field){
         List<FieldCoordinate> moves = new ArrayList<>();
 
         if(coords.getBoard() == 0) {
@@ -40,16 +40,16 @@ public class Griffon extends Figure {
             moves.add(new FieldCoordinate(0, coords.getY() - 1, coords.getX() - 1));
             moves.add(new FieldCoordinate(0, coords.getY() - 1, coords.getX() + 1));
         }
-        checkBounds(moves);
+        checkMoveValidity(moves, field, team);
 
         return moves;
     }
 
     public List<FieldCoordinate> getPossibleMoves(Field field, FieldCoordinate coords){
-        return getBothMoves(coords);
+        return getBothMoves(coords, field);
     }
 
     public List<FieldCoordinate> getCaptureMoves(Field field, FieldCoordinate coords){
-        return getBothMoves(coords);
+        return getBothMoves(coords, field);
     }
 }

@@ -13,22 +13,26 @@ public abstract class Figure {
         this.team = team;
     }
 
-    protected void checkBounds(List <FieldCoordinate> moves) {
+    protected void checkMoveValidity(List<FieldCoordinate> moves, Field field, Team team){
+        //bounds
         for (Iterator<FieldCoordinate> iterator = moves.iterator(); iterator.hasNext(); )
             if (iterator.next().getBoard() > 2 || iterator.next().getBoard() < 0 || iterator.next().getY() < 0 ||
                     iterator.next().getY() >= 8 || iterator.next().getX() < 0 || iterator.next().getX() >= 12)
                 iterator.remove();
+
+        //team
+        for (Iterator<FieldCoordinate> iterator = moves.iterator(); iterator.hasNext(); ){
+            FieldCoordinate coords = iterator.next();
+            if(!field.isEmpty(coords) && field.getFigure(coords).getTeam() == team)
+                iterator.remove();
+        }
     }
     protected void checkPossibilityMoves(List<FieldCoordinate> possibleMoves, Field field){
-        checkBounds(possibleMoves);
-
         for (Iterator<FieldCoordinate> iterator = possibleMoves.iterator(); iterator.hasNext(); )
             if(!field.isEmpty(iterator.next()))
                 iterator.remove();
     }
     protected void checkCaptureMoves(List<FieldCoordinate> captureMoves, Field field){
-        checkBounds(captureMoves);
-
         for (Iterator<FieldCoordinate> iterator = captureMoves.iterator(); iterator.hasNext(); )
             if(field.isEmpty(iterator.next()))
                 iterator.remove();

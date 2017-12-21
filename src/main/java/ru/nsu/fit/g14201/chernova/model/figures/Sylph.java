@@ -6,7 +6,6 @@ import ru.nsu.fit.g14201.chernova.model.Figure;
 import ru.nsu.fit.g14201.chernova.model.Team;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -30,19 +29,7 @@ public class Sylph extends Figure {
         }
         checkPossibilityMoves(possibleMoves, field);
     }
-    private void checkBounds(List <FieldCoordinate> moves){
-        for (Iterator<FieldCoordinate> iterator = moves.iterator(); iterator.hasNext(); )
-            if(iterator.next().getBoard() > 1 || iterator.next().getBoard() < 0 || iterator.next().getY() < 0 ||
-                        iterator.next().getY() >= 8 || iterator.next().getX() < 0 || iterator.next().getX() >= 12)
-                iterator.remove();
-    }
-    private void checkPossibilityMoves(List<FieldCoordinate> possibleMoves, Field field){
-        checkBounds(possibleMoves);
 
-        for (Iterator<FieldCoordinate> iterator = possibleMoves.iterator(); iterator.hasNext(); )
-            if(!field.isEmpty(iterator.next()))
-                iterator.remove();
-    }
     public List<FieldCoordinate> getPossibleMoves(Field field, FieldCoordinate coords){
         List<FieldCoordinate> possibleMoves = new ArrayList<>();
         if(coords.getBoard() == 0) {
@@ -60,13 +47,7 @@ public class Sylph extends Figure {
 
         return possibleMoves;
     }
-    private void checkCaptureMoves(List<FieldCoordinate> captureMoves, Field field){
-        checkBounds(captureMoves);
 
-        for (Iterator<FieldCoordinate> iterator = captureMoves.iterator(); iterator.hasNext(); )
-            if(field.isEmpty(iterator.next()))
-                iterator.remove();
-    }
     public List<FieldCoordinate> getCaptureMoves(Field field, FieldCoordinate coords){
         List<FieldCoordinate> captureMoves = new ArrayList<>();
         if(coords.getBoard() == 0) {

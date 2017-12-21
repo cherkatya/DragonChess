@@ -46,10 +46,18 @@ public class Griffon extends Figure {
     }
 
     public List<FieldCoordinate> getPossibleMoves(Field field, FieldCoordinate coords){
-        return getBothMoves(coords, field);
+        List<FieldCoordinate> possibleMoves = getBothMoves(coords, field);
+
+        checkPossibilityMoves(possibleMoves, field);
+
+        return possibleMoves;
     }
 
     public List<FieldCoordinate> getCaptureMoves(Field field, FieldCoordinate coords){
-        return getBothMoves(coords, field);
+        List<FieldCoordinate> captureMoves = getBothMoves(coords, field);
+
+        checkCaptureMoves(captureMoves, field);
+
+        return captureMoves;
     }
 }

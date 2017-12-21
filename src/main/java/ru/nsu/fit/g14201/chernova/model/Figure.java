@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Катя on 21.12.2017.
  */
 public abstract class Figure {
-    private Team team;
+    protected Team team;
 
     public Figure(Team team){
         this.team = team;

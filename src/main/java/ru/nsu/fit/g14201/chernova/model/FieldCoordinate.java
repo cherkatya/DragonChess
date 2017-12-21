@@ -8,6 +8,12 @@ public class FieldCoordinate {
     private int x;
     private int y;
 
+    public FieldCoordinate(int board, int x, int y){
+        this.board = board;
+        this.x = x;
+        this.y = y;
+    }
+
     public int getBoard() {
         return board;
     }

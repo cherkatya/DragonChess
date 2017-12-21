@@ -16,14 +16,40 @@ public class Griffon extends Figure {
         super(team);
     }
 
-    public List<FieldCoordinate> getPossibleMoves(Field field, FieldCoordinate coords){
-        List<FieldCoordinate> possibleMoves = new ArrayList<>();
+    private List<FieldCoordinate> getBothMoves(FieldCoordinate coords){
+        List<FieldCoordinate> moves = new ArrayList<>();
 
-        return possibleMoves;
+        if(coords.getBoard() == 0) {
+            moves.add(new FieldCoordinate(0, coords.getY() + 2, coords.getX() - 3));
+            moves.add(new FieldCoordinate(0, coords.getY() + 2, coords.getX() + 3));
+            moves.add(new FieldCoordinate(0, coords.getY() + 3, coords.getX() - 2));
+            moves.add(new FieldCoordinate(0, coords.getY() + 3, coords.getX() + 2));
+            moves.add(new FieldCoordinate(0, coords.getY() - 2, coords.getX() - 3));
+            moves.add(new FieldCoordinate(0, coords.getY() - 2, coords.getX() + 3));
+            moves.add(new FieldCoordinate(0, coords.getY() - 3, coords.getX() - 2));
+            moves.add(new FieldCoordinate(0, coords.getY() - 3, coords.getX() + 2));
+
+            moves.add(new FieldCoordinate(1, coords.getY() + 1, coords.getX() - 1));
+            moves.add(new FieldCoordinate(1, coords.getY() + 1, coords.getX() + 1));
+            moves.add(new FieldCoordinate(1, coords.getY() - 1, coords.getX() - 1));
+            moves.add(new FieldCoordinate(1, coords.getY() - 1, coords.getX() + 1));
+        }
+        if(coords.getBoard() == 1){
+            moves.add(new FieldCoordinate(0, coords.getY() + 1, coords.getX() - 1));
+            moves.add(new FieldCoordinate(0, coords.getY() + 1, coords.getX() + 1));
+            moves.add(new FieldCoordinate(0, coords.getY() - 1, coords.getX() - 1));
+            moves.add(new FieldCoordinate(0, coords.getY() - 1, coords.getX() + 1));
+        }
+        checkBounds(moves);
+
+        return moves;
     }
-    public List<FieldCoordinate> getCaptureMoves(Field field, FieldCoordinate coords){
-        List<FieldCoordinate> captureMoves = new ArrayList<>();
 
-        return captureMoves;
+    public List<FieldCoordinate> getPossibleMoves(Field field, FieldCoordinate coords){
+        return getBothMoves(coords);
+    }
+
+    public List<FieldCoordinate> getCaptureMoves(Field field, FieldCoordinate coords){
+        return getBothMoves(coords);
     }
 }

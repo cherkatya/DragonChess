@@ -8,6 +8,10 @@ import java.util.List;
 public abstract class Figure {
     private Team team;
 
+    public Figure(Team team){
+        this.team = team;
+    }
+
     public Team getTeam(){
         return team;
     }

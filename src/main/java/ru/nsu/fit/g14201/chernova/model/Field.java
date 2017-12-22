@@ -9,8 +9,7 @@ public class Field {
     private Figure[][][] field = new Figure[3][8][12];
 
     public void setFigure(Figure figure, FieldCoordinate coords){
-        if(isEmpty(coords))
-            field[coords.getBoard()][coords.getY()][coords.getX()] = figure;
+        field[coords.getBoard()][coords.getY()][coords.getX()] = figure;
     }
     public Figure getFigure(FieldCoordinate coords){
         return field[coords.getBoard()][coords.getY()][coords.getX()];
@@ -19,8 +18,12 @@ public class Field {
         return field[coords.getBoard()][coords.getY()][coords.getX()] == null;
     }
     public void makeMove(GameMove gameMove){
-        if(!isEmpty(gameMove.getOldPosition())) {
-            setFigure(getFigure(gameMove.getOldPosition()), gameMove.getNewPosition());
+        setFigure(getFigure(gameMove.getOldPosition()), gameMove.getNewPosition());
+    }
+    public void transformFigure(Figure figure, FieldCoordinate coords){
+        if(figure.getClass().getName().equals("ru.nsu.fit.g14201.chernova.model.figures.Warrior")){
+            if(coords.getY() == 7 && figure.getTeam() == Team.GOLDEN || coords.getY() == 0 && figure.getTeam() == Team.CRIMSON)
+                field[coords.getBoard()][coords.getY()][coords.getX()] = new Hero(figure.getTeam());
         }
     }
     public void populate(){

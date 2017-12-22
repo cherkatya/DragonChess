@@ -1,6 +1,7 @@
 package ru.nsu.fit.g14201.chernova.model;
 
 import org.junit.Test;
+import ru.nsu.fit.g14201.chernova.model.figures.Warrior;
 
 import static org.junit.Assert.assertEquals;
 
@@ -52,5 +53,15 @@ public class FieldTest {
         }
 
         assertEquals(18, figureCount);
+    }
+    @Test
+    public void transformationTest(){
+        Field field = new Field();
+        Figure warrior = new Warrior(Team.GOLDEN);
+        FieldCoordinate coords = new FieldCoordinate(1, 0, 7);
+        field.setFigure(warrior, coords);
+        field.transformFigure(warrior, coords);
+
+        assertEquals(field.getFigure(coords).getClass().getName(), "ru.nsu.fit.g14201.chernova.model.figures.Hero");
     }
 }

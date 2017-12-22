@@ -13,7 +13,8 @@ public class Board extends JPanel {
     private final Point position = new Point(0, 0);
     private final int rows = 8;
     private final int columns = 12;
-    private final Dimension cellSize = new Dimension(25, 25);
+    private final int cellCommonSize = 25;
+    private final Dimension cellSize = new Dimension(cellCommonSize, cellCommonSize);
     private final Dimension size = new Dimension(columns * cellSize.width, rows * cellSize.height);
 
     public void paint(Graphics g){

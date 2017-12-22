@@ -10,17 +10,25 @@ import java.awt.*;
  */
 public class ChessFrame extends JFrame {
     private Color backgroundColor = Color.LIGHT_GRAY;
-    private Dimension frameSize = new Dimension(600, 600);
+    private Dimension frameSize = new Dimension(1000, 600);
 
     public ChessFrame() {
         super("Dragon Chess");
 
         setSize(frameSize);
-        //setLocationRelativeTo(null);
-        setLayout(new GridLayout(2, 1));
+        setLocationRelativeTo(null);    //set frame in center of screen
+        setLayout(new GridLayout(3, 1, 0, 0));
+//        add(Box.createVerticalGlue());
+//        add(Box.createVerticalGlue());
+//        add(Box.createVerticalGlue());
         add(new Board());
         add(new Board());
+        add(new Board());
+//        add(Box.createVerticalGlue());
+//        add(Box.createVerticalGlue());
+//        add(Box.createVerticalGlue());
         setBackground(backgroundColor);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
+

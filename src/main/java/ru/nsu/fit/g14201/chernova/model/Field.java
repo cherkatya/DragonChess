@@ -55,10 +55,10 @@ public class Field {
         setFigure(new Unicorn(Team.GOLDEN), new FieldCoordinate(1, 10, 0));
         setFigure(new Unicorn(Team.CRIMSON), new FieldCoordinate(1, 10, 7));
 
-        setFigure(new Hero(Team.GOLDEN), new FieldCoordinate(0, 2, 0));
-        setFigure(new Hero(Team.CRIMSON), new FieldCoordinate(0, 2, 7));
-        setFigure(new Hero(Team.GOLDEN), new FieldCoordinate(0, 9, 0));
-        setFigure(new Hero(Team.CRIMSON), new FieldCoordinate(0, 9, 7));
+        setFigure(new Hero(Team.GOLDEN), new FieldCoordinate(1, 2, 0));
+        setFigure(new Hero(Team.CRIMSON), new FieldCoordinate(1, 2, 7));
+        setFigure(new Hero(Team.GOLDEN), new FieldCoordinate(1, 9, 0));
+        setFigure(new Hero(Team.CRIMSON), new FieldCoordinate(1, 9, 7));
 
         setFigure(new Thief(Team.GOLDEN), new FieldCoordinate(1, 3, 0));
         setFigure(new Thief(Team.CRIMSON), new FieldCoordinate(1, 3, 7));
@@ -69,10 +69,10 @@ public class Field {
         setFigure(new Cleric(Team.CRIMSON), new FieldCoordinate(1, 4, 7));
         setFigure(new Mage(Team.GOLDEN), new FieldCoordinate(1, 5, 0));
         setFigure(new Mage(Team.CRIMSON), new FieldCoordinate(1, 5, 7));
-        setFigure(new King(Team.GOLDEN), new FieldCoordinate(0, 6, 0));
-        setFigure(new King(Team.CRIMSON), new FieldCoordinate(0, 6, 7));
-        setFigure(new Paladin(Team.GOLDEN), new FieldCoordinate(0, 7, 0));
-        setFigure(new Paladin(Team.CRIMSON), new FieldCoordinate(0, 7, 7));
+        setFigure(new King(Team.GOLDEN), new FieldCoordinate(1, 6, 0));
+        setFigure(new King(Team.CRIMSON), new FieldCoordinate(1, 6, 7));
+        setFigure(new Paladin(Team.GOLDEN), new FieldCoordinate(1, 7, 0));
+        setFigure(new Paladin(Team.CRIMSON), new FieldCoordinate(1, 7, 7));
     }
     private void populateDownBoard(){
         for(int x = 1; x < 12; x += 2){
@@ -83,7 +83,7 @@ public class Field {
         setFigure(new Basilisk(Team.CRIMSON), new FieldCoordinate(2, 2, 7));
         setFigure(new Basilisk(Team.GOLDEN), new FieldCoordinate(2, 10, 0));
         setFigure(new Basilisk(Team.CRIMSON), new FieldCoordinate(2, 10, 7));
-        setFigure(new Elemental(Team.GOLDEN), new FieldCoordinate(0, 6, 0));
-        setFigure(new Elemental(Team.CRIMSON), new FieldCoordinate(0, 6, 7));
+        setFigure(new Elemental(Team.GOLDEN), new FieldCoordinate(2, 6, 0));
+        setFigure(new Elemental(Team.CRIMSON), new FieldCoordinate(2, 6, 7));
     }
 }

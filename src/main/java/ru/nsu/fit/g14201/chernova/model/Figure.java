@@ -15,10 +15,11 @@ public abstract class Figure {
 
     protected void checkMoveValidity(List<FieldCoordinate> moves, Field field, Team team){
         //bounds
-        for (Iterator<FieldCoordinate> iterator = moves.iterator(); iterator.hasNext(); )
-            if (iterator.next().getBoard() > 2 || iterator.next().getBoard() < 0 || iterator.next().getY() < 0 ||
-                    iterator.next().getY() >= 8 || iterator.next().getX() < 0 || iterator.next().getX() >= 12)
+        for (Iterator<FieldCoordinate> iterator = moves.iterator(); iterator.hasNext(); ){
+            FieldCoordinate coord = iterator.next();
+            if (coord.getBoard() > 2 || coord.getBoard() < 0 || coord.getY() < 0 || coord.getY() >= 8 || coord.getX() < 0 || coord.getX() >= 12)
                 iterator.remove();
+        }
 
         //team
         for (Iterator<FieldCoordinate> iterator = moves.iterator(); iterator.hasNext(); ){

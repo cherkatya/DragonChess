@@ -1,9 +1,9 @@
 package ru.nsu.fit.g14201.chernova.model.figures;
 
 import ru.nsu.fit.g14201.chernova.model.Field;
-import ru.nsu.fit.g14201.chernova.model.FieldCoordinate;
 import ru.nsu.fit.g14201.chernova.model.Figure;
 import ru.nsu.fit.g14201.chernova.model.Team;
+import ru.nsu.fit.g14201.chernova.model.FieldCoordinate;
 
 import java.util.ArrayList;
 import java.util.List;

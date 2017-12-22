@@ -1,6 +1,4 @@
-package ru.nsu.fit.g14201.chernova;
-
-import ru.nsu.fit.g14201.chernova.model.Field;
+package ru.nsu.fit.g14201.chernova.model;
 
 /**
  * Created by Катя on 07.12.2017.

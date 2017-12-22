@@ -37,7 +37,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>ru.nsu.fit.g14201.chernova.Main</mainClass>
+                            <mainClass>ru.nsu.fit.g14201.chernova.model.Main</mainClass>
                         </manifest>
                     </archive>
                     <finalName>dragonChess</finalName>

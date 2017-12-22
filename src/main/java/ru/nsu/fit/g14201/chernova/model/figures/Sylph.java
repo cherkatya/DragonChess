@@ -20,11 +20,11 @@ public class Sylph extends Figure {
         possibleMoves.add(new FieldCoordinate(coords.getBoard() - 1, coords.getY(), coords.getX()));
         if (team == Team.GOLDEN) {
             for(int x = 0; x < 12; x += 2){
-                possibleMoves.add(new FieldCoordinate(0, 1, x));
+                possibleMoves.add(new FieldCoordinate(0, x, 1));
             }
         } else {
             for(int x = 0; x < 12; x += 2){
-                possibleMoves.add(new FieldCoordinate(0, 6, x));
+                possibleMoves.add(new FieldCoordinate(0, x, 6));
             }
         }
     }
@@ -33,11 +33,11 @@ public class Sylph extends Figure {
         List<FieldCoordinate> possibleMoves = new ArrayList<>();
         if(coords.getBoard() == 0) {
             if (team == Team.GOLDEN) {
-                possibleMoves.add(new FieldCoordinate(coords.getBoard(), coords.getY() + 1, coords.getX() - 1));
-                possibleMoves.add(new FieldCoordinate(coords.getBoard(), coords.getY() + 1, coords.getX() + 1));
+                possibleMoves.add(new FieldCoordinate(coords.getBoard(), coords.getX() - 1, coords.getY() + 1));
+                possibleMoves.add(new FieldCoordinate(coords.getBoard(), coords.getX() + 1, coords.getY() + 1));
             } else {
-                possibleMoves.add(new FieldCoordinate(coords.getBoard(), coords.getY() - 1, coords.getX() - 1));
-                possibleMoves.add(new FieldCoordinate(coords.getBoard(), coords.getY() - 1, coords.getX() + 1));
+                possibleMoves.add(new FieldCoordinate(coords.getBoard(), coords.getX() - 1, coords.getY() - 1));
+                possibleMoves.add(new FieldCoordinate(coords.getBoard(), coords.getX() + 1, coords.getY() - 1));
             }
         }
         if(coords.getBoard() == 1)
@@ -53,11 +53,11 @@ public class Sylph extends Figure {
         List<FieldCoordinate> captureMoves = new ArrayList<>();
         if(coords.getBoard() == 0) {
             if (team == Team.GOLDEN) {
-                captureMoves.add(new FieldCoordinate(coords.getBoard(), coords.getY() + 1, coords.getX()));
+                captureMoves.add(new FieldCoordinate(coords.getBoard(), coords.getX(), coords.getY() + 1));
             } else {
-                captureMoves.add(new FieldCoordinate(coords.getBoard(), coords.getY() - 1, coords.getX()));
+                captureMoves.add(new FieldCoordinate(coords.getBoard(), coords.getX(), coords.getY() - 1));
             }
-            captureMoves.add(new FieldCoordinate(coords.getBoard() + 1, coords.getY(), coords.getX()));
+            captureMoves.add(new FieldCoordinate(coords.getBoard() + 1, coords.getX(), coords.getY()));
         }
 
         checkMoveValidity(captureMoves, field, team);

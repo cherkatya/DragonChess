@@ -5,9 +5,7 @@ import ru.nsu.fit.g14201.chernova.model.FieldCoordinate;
 import ru.nsu.fit.g14201.chernova.model.Figure;
 import ru.nsu.fit.g14201.chernova.model.Team;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -18,56 +16,73 @@ public class Dragon extends Figure {
         super(team);
     }
 
-    private void checkBlocks(List<FieldCoordinate> moves, Field field, FieldCoordinate baseCoords){
-        for (Iterator<FieldCoordinate> iterator = moves.iterator(); iterator.hasNext(); ){
-            FieldCoordinate coords = iterator.next();
-            if(!field.isEmpty(coords) && field.getFigure(coords).getTeam() == team)
-                iterator.remove();
-        }
+    private boolean isLastCell(int x, int y) {
+        return y == 0 || y == 11 || x == 0 || x == 7;
     }
-    private boolean isBoardEnd(int x, int y) {
-        return y < 0 || y >= 12 || x < 0 || x >= 8;
-    }
-    private List<FieldCoordinate> getMoves(FieldCoordinate coords, Field field){
-        List<FieldCoordinate> moves = new ArrayList<>();
-        int x = coords.getX();
-        int y = coords.getY();
-        Point[] bounds = new Point[4];
-
-        for(int shift = 1; shift <= 7; shift++){
-            if(!isBoardEnd(x + shift, y + shift))
-                moves.add(new FieldCoordinate(0, coords.getY() + shift, coords.getX() + shift));
-            if(!isBoardEnd(x + shift, y - shift))
-                moves.add(new FieldCoordinate(0, coords.getY() - shift, coords.getX() + shift));
-            if(!isBoardEnd(x - shift, y + shift))
-                moves.add(new FieldCoordinate(0, coords.getY() + shift, coords.getX() - shift));
-            if(!isBoardEnd(x - shift, y - shift))
-                moves.add(new FieldCoordinate(0, coords.getY() - shift, coords.getX() - shift));
+    private void checkPossibleLine(int index, boolean[] bounds, List<FieldCoordinate> moves, Field field, int x, int y){
+        if(!bounds[index]){
+            if(isLastCell(x, y))
+                bounds[index] = true;
+            FieldCoordinate coord = new FieldCoordinate(0, x, y);
+            if(field.isEmpty(coord))
+                moves.add(coord);
+            else{
+                bounds[index] = true;
+            }
         }
-
-        checkMoveValidity(moves, field, team);
-
-        return moves;
     }
     public List<FieldCoordinate> getPossibleMoves(Field field, FieldCoordinate coords){
-        List<FieldCoordinate> possibleMoves = getMoves(coords, field);
+        List<FieldCoordinate> possibleMoves = new ArrayList<>();
+        int x = coords.getX();
+        int y = coords.getY();
+        boolean[] bounds = new boolean[4];
 
-        //checkPossibleBlocks(possibleMoves, field);
+        for(int shift = 1; shift <= 7; shift++){
+            checkPossibleLine(0, bounds, possibleMoves, field, x + shift, y + shift);
+            checkPossibleLine(1, bounds, possibleMoves, field, x - shift, y + shift);
+            checkPossibleLine(2, bounds, possibleMoves, field, x - shift, y - shift);
+            checkPossibleLine(3, bounds, possibleMoves, field, x + shift, y - shift);
+        }
+
+        possibleMoves.add(new FieldCoordinate(1, coords.getX(), coords.getY() + 1));
+        possibleMoves.add(new FieldCoordinate(1, coords.getX() + 1, coords.getY()));
+        possibleMoves.add(new FieldCoordinate(1, coords.getX() - 1, coords.getY()));
+        possibleMoves.add(new FieldCoordinate(1, coords.getX(), coords.getY() - 1));
 
         return possibleMoves;
     }
+    private void checkCaptureLine(int index, boolean[] bounds, List<FieldCoordinate> moves, Field field, int x, int y){
+        if(!bounds[index]){
+            if(isLastCell(x, y))
+                bounds[index] = true;
+            FieldCoordinate coord = new FieldCoordinate(0, x, y);
+            if(!field.isEmpty(coord)){
+                bounds[index] = true;
+                if(field.getFigure(coord).getTeam() != team)
+                    moves.add(coord);
+            }
+        }
+    }
     public List<FieldCoordinate> getCaptureMoves(Field field, FieldCoordinate coords){
-        List<FieldCoordinate> captureMoves = getMoves(coords, field);
+        List<FieldCoordinate> captureMoves = new ArrayList<>();
 
-        //checkCaptureBlocks(captureMoves, field);
+        captureMoves.add(new FieldCoordinate(1, coords.getX(), coords.getY() + 1));
+        captureMoves.add(new FieldCoordinate(1, coords.getX() + 1, coords.getY()));
+        captureMoves.add(new FieldCoordinate(1, coords.getX() - 1, coords.getY()));
+        captureMoves.add(new FieldCoordinate(1, coords.getX(), coords.getY() - 1));
 
-        captureMoves.add(new FieldCoordinate(1, coords.getY() + 1, coords.getX()));
-        captureMoves.add(new FieldCoordinate(1, coords.getY(), coords.getX() + 1));
-        captureMoves.add(new FieldCoordinate(1, coords.getY(), coords.getX() - 1));
-        captureMoves.add(new FieldCoordinate(1, coords.getY() - 1, coords.getX()));
-        captureMoves.add(new FieldCoordinate(1, coords.getY(), coords.getX()));
+        checkCaptureMoves(captureMoves, field);
 
-        checkMoveValidity(captureMoves, field, team);
+        int x = coords.getX();
+        int y = coords.getY();
+        boolean[] bounds = new boolean[4];
+
+        for(int shift = 1; shift <= 7; shift++){
+            checkCaptureLine(0, bounds, captureMoves, field, x + shift, y + shift);
+            checkCaptureLine(1, bounds, captureMoves, field, x - shift, y + shift);
+            checkCaptureLine(2, bounds, captureMoves, field, x - shift, y - shift);
+            checkCaptureLine(3, bounds, captureMoves, field, x + shift, y - shift);
+        }
 
         return captureMoves;
     }

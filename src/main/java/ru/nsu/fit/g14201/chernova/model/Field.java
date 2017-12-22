@@ -21,10 +21,7 @@ public class Field {
         setFigure(getFigure(gameMove.getOldPosition()), gameMove.getNewPosition());
     }
     public void transformFigure(Figure figure, FieldCoordinate coords){
-        if(figure.getClass().getName().equals("ru.nsu.fit.g14201.chernova.model.figures.Warrior")){
-            if(coords.getY() == 7 && figure.getTeam() == Team.GOLDEN || coords.getY() == 0 && figure.getTeam() == Team.CRIMSON)
-                field[coords.getBoard()][coords.getY()][coords.getX()] = new Hero(figure.getTeam());
-        }
+        field[coords.getBoard()][coords.getY()][coords.getX()] = new Hero(figure.getTeam());
     }
     public void populate(){
         populateUpBoard();

@@ -17,9 +17,11 @@ public class Dragon extends Figure {
     }
 
     private boolean isLastCell(int x, int y) {
-        return y == 0 || y == 11 || x == 0 || x == 7;
+        return y == 0 || y == 7 || x == 0 || x == 11;
     }
     private void checkPossibleLine(int index, boolean[] bounds, List<FieldCoordinate> moves, Field field, int x, int y){
+        if(x < 0 || y < 0 || x >= 12 || y >= 8)
+            bounds[index] = true;
         if(!bounds[index]){
             if(isLastCell(x, y))
                 bounds[index] = true;
@@ -33,6 +35,14 @@ public class Dragon extends Figure {
     }
     public List<FieldCoordinate> getPossibleMoves(Field field, FieldCoordinate coords){
         List<FieldCoordinate> possibleMoves = new ArrayList<>();
+
+        possibleMoves.add(new FieldCoordinate(0, coords.getX(), coords.getY() + 1));
+        possibleMoves.add(new FieldCoordinate(0, coords.getX() + 1, coords.getY()));
+        possibleMoves.add(new FieldCoordinate(0, coords.getX() - 1, coords.getY()));
+        possibleMoves.add(new FieldCoordinate(0, coords.getX(), coords.getY() - 1));
+
+        checkMoveValidity(possibleMoves, field, team);
+
         int x = coords.getX();
         int y = coords.getY();
         boolean[] bounds = new boolean[4];
@@ -43,11 +53,6 @@ public class Dragon extends Figure {
             checkPossibleLine(2, bounds, possibleMoves, field, x - shift, y - shift);
             checkPossibleLine(3, bounds, possibleMoves, field, x + shift, y - shift);
         }
-
-        possibleMoves.add(new FieldCoordinate(1, coords.getX(), coords.getY() + 1));
-        possibleMoves.add(new FieldCoordinate(1, coords.getX() + 1, coords.getY()));
-        possibleMoves.add(new FieldCoordinate(1, coords.getX() - 1, coords.getY()));
-        possibleMoves.add(new FieldCoordinate(1, coords.getX(), coords.getY() - 1));
 
         return possibleMoves;
     }
@@ -66,10 +71,16 @@ public class Dragon extends Figure {
     public List<FieldCoordinate> getCaptureMoves(Field field, FieldCoordinate coords){
         List<FieldCoordinate> captureMoves = new ArrayList<>();
 
+        captureMoves.add(new FieldCoordinate(1, coords.getX(), coords.getY()));
         captureMoves.add(new FieldCoordinate(1, coords.getX(), coords.getY() + 1));
         captureMoves.add(new FieldCoordinate(1, coords.getX() + 1, coords.getY()));
         captureMoves.add(new FieldCoordinate(1, coords.getX() - 1, coords.getY()));
         captureMoves.add(new FieldCoordinate(1, coords.getX(), coords.getY() - 1));
+
+        captureMoves.add(new FieldCoordinate(0, coords.getX(), coords.getY() + 1));
+        captureMoves.add(new FieldCoordinate(0, coords.getX() + 1, coords.getY()));
+        captureMoves.add(new FieldCoordinate(0, coords.getX() - 1, coords.getY()));
+        captureMoves.add(new FieldCoordinate(0, coords.getX(), coords.getY() - 1));
 
         checkCaptureMoves(captureMoves, field);
 
@@ -83,6 +94,8 @@ public class Dragon extends Figure {
             checkCaptureLine(2, bounds, captureMoves, field, x - shift, y - shift);
             checkCaptureLine(3, bounds, captureMoves, field, x + shift, y - shift);
         }
+
+        checkMoveValidity(captureMoves, field, team);
 
         return captureMoves;
     }

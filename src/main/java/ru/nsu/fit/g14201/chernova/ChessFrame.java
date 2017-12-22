@@ -1,28 +1,26 @@
 package ru.nsu.fit.g14201.chernova;
 
+import oracle.jrockit.jfr.JFR;
+
+import javax.swing.*;
+import java.awt.*;
+
 /**
  * Created by SPN on 23.12.2017.
  */
-import org.w3c.dom.css.RGBColor;
-
-import java.awt.Color;
-import java.awt.Graphics;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 public class ChessFrame extends JFrame {
-
     private Color backgroundColor = Color.LIGHT_GRAY;
+    private Dimension frameSize = new Dimension(600, 600);
 
     public ChessFrame() {
         super("Dragon Chess");
 
-        setSize(600,600);
-        getContentPane().add(new Board());
-        setLocationRelativeTo(null);
+        setSize(frameSize);
+        //setLocationRelativeTo(null);
+        setLayout(new GridLayout(2, 1));
+        add(new Board());
+        add(new Board());
         setBackground(backgroundColor);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
     }
-
 }

@@ -7,25 +7,29 @@ import java.awt.*;
  * Created by SPN on 23.12.2017.
  */
 public class Board extends JPanel {
-    private Color firstSideColor = new Color(0xffd700);
-    private Color secondSideColor = new Color(220, 20, 60);
+    private final Color firstSideColor = new Color(0xffd700);
+    private final Color secondSideColor = new Color(220, 20, 60);
+
+    private final Point position = new Point(0, 0);
+    private final int rows = 8;
+    private final int columns = 12;
+    private final Dimension cellSize = new Dimension(25, 25);
+    private final Dimension size = new Dimension(columns * cellSize.width, rows * cellSize.height);
 
     public void paint(Graphics g){
         g.setColor(firstSideColor);
-        g.fillRect(100, 100, 400, 400);
+        g.fillRect(position.x, position.y, size.width, size.height);
 
         g.setColor(secondSideColor);
-        for(int i = 100; i <= 400; i+=100){
-            for(int j = 100; j <= 400; j+=100){
-                //g.clearRect(i, j, 50, 50);
-                g.fillRect(i, j, 50, 50);
+        for(int i = 0; i < size.width; i += 2 * cellSize.width){
+            for(int j = 0; j < size.height; j += 2 * cellSize.height){
+                g.fillRect(i, j, cellSize.width, cellSize.height);
             }
         }
 
-        for(int i = 150; i <= 450; i+=100){
-            for(int j = 150; j <= 450; j+=100){
-                //g.clearRect(i, j, 50, 50);
-                g.fillRect(i, j, 50, 50);
+        for(int i = cellSize.width; i < size.width; i += 2 * cellSize.width){
+            for(int j = cellSize.height; j < size.height; j += 2 * cellSize.height){
+                g.fillRect(i, j, cellSize.width, cellSize.height);
             }
         }
     }

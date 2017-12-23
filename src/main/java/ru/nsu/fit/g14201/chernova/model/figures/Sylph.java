@@ -16,7 +16,7 @@ public class Sylph extends Figure {
         super(team);
     }
 
-    private void addSecondBoardMoves(List<FieldCoordinate> possibleMoves, FieldCoordinate coords, Field field){
+    private void addSecondBoardMoves(List<FieldCoordinate> possibleMoves, FieldCoordinate coords){
         possibleMoves.add(new FieldCoordinate(coords.getBoard() - 1, coords.getY(), coords.getX()));
         if (team == Team.GOLDEN) {
             for(int x = 0; x < 12; x += 2){
@@ -41,7 +41,7 @@ public class Sylph extends Figure {
             }
         }
         if(coords.getBoard() == 1)
-            addSecondBoardMoves(possibleMoves, coords, field);
+            addSecondBoardMoves(possibleMoves, coords);
 
         checkMoveValidity(possibleMoves, field, team);
         checkPossibilityMoves(possibleMoves, field);

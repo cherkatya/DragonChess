@@ -1,4 +1,4 @@
-package ru.nsu.fit.g14201.chernova;
+package ru.nsu.fit.g14201.chernova.view;
 
 import javax.swing.*;
 import java.awt.event.FocusAdapter;
@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 /**
  * Created by SPN on 23.12.2017.
  */
-public class BoardZoom extends Board {
+class BoardZoom extends Board {
 
     private JFrame zoomedBoard = new JFrame();
 

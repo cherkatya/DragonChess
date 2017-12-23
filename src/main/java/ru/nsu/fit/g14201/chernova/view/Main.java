@@ -1,7 +1,4 @@
-package ru.nsu.fit.g14201.chernova;
-
-import javax.swing.*;
-import java.awt.*;
+package ru.nsu.fit.g14201.chernova.view;
 
 /**
  * Created by Катя on 07.12.2017.

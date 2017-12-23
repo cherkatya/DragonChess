@@ -1,10 +1,11 @@
-package ru.nsu.fit.g14201.chernova;
+package ru.nsu.fit.g14201.chernova.model;
 
 /**
  * Created by Катя on 07.12.2017.
  */
 public class Main {
     public static void main(String[] args) {
-        System.out.println(0);
+        Field field = new Field();
+        field.populate();
     }
 }

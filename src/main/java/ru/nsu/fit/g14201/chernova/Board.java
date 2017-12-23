@@ -4,18 +4,30 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by SPN on 23.12.2017.
+ * Created by RARETA on 23.12.2017.
  */
 public class Board extends JPanel {
     private final Color firstSideColor = new Color(0xffd700);
     private final Color secondSideColor = new Color(220, 20, 60);
 
     private final Point position = new Point(0, 0);
-    private final int rows = 8;
-    private final int columns = 12;
-    private final int cellCommonSize = 25;
-    private final Dimension cellSize = new Dimension(cellCommonSize, cellCommonSize);
-    private final Dimension size = new Dimension(columns * cellSize.width, rows * cellSize.height);
+    protected final int rows = 8;
+    protected final int columns = 12;
+    protected final int cellCommonSize;
+    protected final Dimension cellSize;
+
+    @Override
+    public Dimension getSize() {
+        return size;
+    }
+
+    protected final Dimension size;
+
+    public Board(int cellSize) {
+        this.cellCommonSize = cellSize;
+        this.cellSize = new Dimension(cellCommonSize, cellCommonSize);
+        this.size = new Dimension(columns * this.cellSize.width, rows * this.cellSize.height);
+    }
 
     public void paint(Graphics g){
         g.setColor(firstSideColor);

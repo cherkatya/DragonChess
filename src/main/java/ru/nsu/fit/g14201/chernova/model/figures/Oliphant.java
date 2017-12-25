@@ -18,14 +18,50 @@ public class Oliphant extends Figure {
 
     private List<FieldCoordinate> getMoves(Field field, FieldCoordinate coords)
     {
+        if (coords.getBoard() != 1)
+        {
+            throw new IllegalArgumentException("Oliphant appeared on the edge board");
+        }
         List<FieldCoordinate> moves = new ArrayList<>();
 
-        for (int i = 1; i < 12; i++)
+        for (int i = 1; coords.getX() - i >= 0; i++)
         {
-            moves.add(new FieldCoordinate(coords.getBoard(), coords.getX() - i, coords.getY()));
-            moves.add(new FieldCoordinate(coords.getBoard(), coords.getX() + i, coords.getY()));
-            moves.add(new FieldCoordinate(coords.getBoard(), coords.getX(), coords.getY() - i));
-            moves.add(new FieldCoordinate(coords.getBoard(), coords.getX(), coords.getY() + i));
+            FieldCoordinate fc = new FieldCoordinate(coords.getBoard(), coords.getX() - i, coords.getY());
+
+            if (!field.isEmpty(fc))
+                break;
+
+            moves.add(fc);
+        }
+
+        for (int i = 1; coords.getX() + i < 12; i++)
+        {
+            FieldCoordinate fc = new FieldCoordinate(coords.getBoard(), coords.getX() + i, coords.getY());
+
+            if (!field.isEmpty(fc))
+                break;
+
+            moves.add(fc);
+        }
+
+        for (int i = 1; coords.getY() - i >= 0; i++)
+        {
+            FieldCoordinate fc = new FieldCoordinate(coords.getBoard(), coords.getX(), coords.getY() - i);
+
+            if (!field.isEmpty(fc))
+                break;
+
+            moves.add(fc);
+        }
+
+        for (int i = 1; coords.getY() + i < 12; i++)
+        {
+            FieldCoordinate fc = new FieldCoordinate(coords.getBoard(), coords.getX(), coords.getY() + i);
+
+            if (!field.isEmpty(fc))
+                break;
+
+            moves.add(fc);
         }
 
         checkMoveValidity(moves, field, team);

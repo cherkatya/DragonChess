@@ -36,7 +36,7 @@ public class MageTest {
         field.setFigure(new Warrior(Team.CRIMSON), new FieldCoordinate(1, 7, 1));
         field.setFigure(new Warrior(Team.CRIMSON), new FieldCoordinate(0, 5, 3));
         List<FieldCoordinate> moves = mage.getPossibleMoves(field, fc);
-        assertEquals(20, moves.size());
+        assertEquals(19, moves.size());
     }
 
     @Test

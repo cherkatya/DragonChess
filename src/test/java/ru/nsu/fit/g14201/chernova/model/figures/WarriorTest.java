@@ -22,7 +22,7 @@ public class WarriorTest {
         assertEquals(1, moves.size());
 
         warrior = new Warrior(Team.CRIMSON);
-        coords = new FieldCoordinate(1,6, 11);
+        coords = new FieldCoordinate(1,6, 7);
         field.setFigure(warrior, coords);
         moves = warrior.getPossibleMoves(field, coords);
 

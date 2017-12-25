@@ -43,42 +43,26 @@ public abstract class Figure {
     {
         for (int i = 1; ((coords.getX() - i) >= 0) && ((coords.getY() - i) >= 0); i++)
         {
-            FieldCoordinate fc = new FieldCoordinate(coords.getBoard(), coords.getX() - i, coords.getY() - i);
-
-            if (!field.isEmpty(fc))
+            if (!addIfEmpty(moves, field, new FieldCoordinate(coords.getBoard(), coords.getX() - i, coords.getY() - i)))
                 break;
-
-            moves.add(fc);
         }
 
         for (int i = 1; ((coords.getX() - i) >= 0) && ((coords.getY() + i) < 12); i++)
         {
-            FieldCoordinate fc = new FieldCoordinate(coords.getBoard(), coords.getX() - i, coords.getY() + i);
-
-            if (!field.isEmpty(fc))
+            if (!addIfEmpty(moves, field, new FieldCoordinate(coords.getBoard(), coords.getX() - i, coords.getY() + i)))
                 break;
-
-            moves.add(fc);
         }
 
         for (int i = 1; ((coords.getX() + i) < 12) && ((coords.getY() - i) >= 0); i++)
         {
-            FieldCoordinate fc = new FieldCoordinate(coords.getBoard(), coords.getX() + i, coords.getY() - i);
-
-            if (!field.isEmpty(fc))
+            if (!addIfEmpty(moves, field, new FieldCoordinate(coords.getBoard(), coords.getX() + i, coords.getY() - i)))
                 break;
-
-            moves.add(fc);
         }
 
         for (int i = 1; ((coords.getX() + i) < 12) && ((coords.getY() + i) < 12); i++)
         {
-            FieldCoordinate fc = new FieldCoordinate(coords.getBoard(), coords.getX() + i, coords.getY() + i);
-
-            if (!field.isEmpty(fc))
+            if (!addIfEmpty(moves, field, new FieldCoordinate(coords.getBoard(), coords.getX() + i, coords.getY() + i)))
                 break;
-
-            moves.add(fc);
         }
     }
 
@@ -86,43 +70,37 @@ public abstract class Figure {
     {
         for (int i = 1; coords.getX() - i >= 0; i++)
         {
-            FieldCoordinate fc = new FieldCoordinate(coords.getBoard(), coords.getX() - i, coords.getY());
-
-            if (!field.isEmpty(fc))
+            if (!addIfEmpty(moves, field, new FieldCoordinate(coords.getBoard(), coords.getX() - i, coords.getY())))
                 break;
-
-            moves.add(fc);
         }
 
         for (int i = 1; coords.getX() + i < 12; i++)
         {
-            FieldCoordinate fc = new FieldCoordinate(coords.getBoard(), coords.getX() + i, coords.getY());
-
-            if (!field.isEmpty(fc))
+            if (!addIfEmpty(moves, field, new FieldCoordinate(coords.getBoard(), coords.getX() + i, coords.getY())))
                 break;
-
-            moves.add(fc);
         }
 
         for (int i = 1; coords.getY() - i >= 0; i++)
         {
-            FieldCoordinate fc = new FieldCoordinate(coords.getBoard(), coords.getX(), coords.getY() - i);
-
-            if (!field.isEmpty(fc))
+            if (!addIfEmpty(moves, field, new FieldCoordinate(coords.getBoard(), coords.getX(), coords.getY() - i)))
                 break;
-
-            moves.add(fc);
         }
 
         for (int i = 1; coords.getY() + i < 12; i++)
         {
-            FieldCoordinate fc = new FieldCoordinate(coords.getBoard(), coords.getX(), coords.getY() + i);
-
-            if (!field.isEmpty(fc))
+            if (!addIfEmpty(moves, field, new FieldCoordinate(coords.getBoard(), coords.getX(), coords.getY() + i)))
                 break;
-
-            moves.add(fc);
         }
+    }
+
+    private boolean addIfEmpty(List<FieldCoordinate> moves, Field field, FieldCoordinate coords)
+    {
+        if (field.isEmpty(coords))
+            return false;
+
+        moves.add(coords);
+
+        return true;
     }
 
     public Team getTeam(){

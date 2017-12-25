@@ -24,45 +24,7 @@ public class Oliphant extends Figure {
         }
         List<FieldCoordinate> moves = new ArrayList<>();
 
-        for (int i = 1; coords.getX() - i >= 0; i++)
-        {
-            FieldCoordinate fc = new FieldCoordinate(coords.getBoard(), coords.getX() - i, coords.getY());
-
-            if (!field.isEmpty(fc))
-                break;
-
-            moves.add(fc);
-        }
-
-        for (int i = 1; coords.getX() + i < 12; i++)
-        {
-            FieldCoordinate fc = new FieldCoordinate(coords.getBoard(), coords.getX() + i, coords.getY());
-
-            if (!field.isEmpty(fc))
-                break;
-
-            moves.add(fc);
-        }
-
-        for (int i = 1; coords.getY() - i >= 0; i++)
-        {
-            FieldCoordinate fc = new FieldCoordinate(coords.getBoard(), coords.getX(), coords.getY() - i);
-
-            if (!field.isEmpty(fc))
-                break;
-
-            moves.add(fc);
-        }
-
-        for (int i = 1; coords.getY() + i < 12; i++)
-        {
-            FieldCoordinate fc = new FieldCoordinate(coords.getBoard(), coords.getX(), coords.getY() + i);
-
-            if (!field.isEmpty(fc))
-                break;
-
-            moves.add(fc);
-        }
+        addOrthogonalMoves(moves, field, coords);
 
         checkMoveValidity(moves, field, team);
 

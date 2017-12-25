@@ -157,8 +157,8 @@ public abstract class Board extends JPanel {
 
     private FigureView[][] field;
 
-    public FigureView getFigure(int x, int y) { return field[y][x]; }
-    public void setFigure(int x, int y, FigureView figure) { field[y][x] = figure; repaint(); }
+    public FigureView getFigure(int x, int y) { return field[ROWS - y - 1][x]; }
+    public void setFigure(int x, int y, FigureView figure) { field[ROWS - y - 1][x] = figure; repaint(); }
 
     public abstract int getNumber();
     public abstract Board clone(Dimension cellSize, @Nullable FigureView[][] field);

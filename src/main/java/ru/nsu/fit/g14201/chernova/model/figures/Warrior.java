@@ -17,13 +17,39 @@ public class Warrior extends Figure {
     }
 
     public List<FieldCoordinate> getPossibleMoves(Field field, FieldCoordinate coords){
-        List<FieldCoordinate> possibleMoves = new ArrayList<>();
+        List<FieldCoordinate> moves = new ArrayList<>();
 
-        return possibleMoves;
+        if (team == Team.GOLDEN)
+        {
+            moves.add(new FieldCoordinate(1, coords.getX(), coords.getY() + 1));
+        }
+        else
+        {
+            moves.add(new FieldCoordinate(1, coords.getX(), coords.getY() - 1));
+        }
+
+        checkMoveValidity(moves, field, team);
+        checkPossibilityMoves(moves, field);
+
+        return moves;
     }
     public List<FieldCoordinate> getCaptureMoves(Field field, FieldCoordinate coords){
-        List<FieldCoordinate> captureMoves = new ArrayList<>();
+        List<FieldCoordinate> moves = new ArrayList<>();
 
-        return captureMoves;
+        if (team == Team.GOLDEN)
+        {
+            moves.add(new FieldCoordinate(1, coords.getX() - 1, coords.getY() + 1));
+            moves.add(new FieldCoordinate(1, coords.getX() + 1, coords.getY() + 1));
+        }
+        else
+        {
+            moves.add(new FieldCoordinate(1, coords.getX() - 1, coords.getY() - 1));
+            moves.add(new FieldCoordinate(1, coords.getX() + 1, coords.getY() - 1));
+        }
+
+        checkMoveValidity(moves, field, team);
+        checkCaptureMoves(moves, field);
+
+        return moves;
     }
 }

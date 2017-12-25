@@ -1,6 +1,7 @@
 package ru.nsu.fit.g14201.chernova.view.utils.boards;
 
 import org.apache.log4j.Logger;
+import ru.nsu.fit.g14201.chernova.view.FieldCoordinateView;
 import ru.nsu.fit.g14201.chernova.view.FigureView;
 import ru.nsu.fit.g14201.chernova.view.utils.TeamView;
 
@@ -23,6 +24,7 @@ public abstract class Board extends JPanel {
         //log.debug(cellSize);
         this.boardSize = new Dimension(COLUMNS * this.cellSize.width, ROWS * this.cellSize.height);
 
+        Board currentBoard = this;
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -36,12 +38,111 @@ public abstract class Board extends JPanel {
                     int j = (int) Math.floor(clickPoint.x * 1.0f / cellSize.width);
                     int i = (int) Math.floor(clickPoint.y * 1.0f / cellSize.height);
                     log.debug("clicked (" + j + " x, " + i + " y)");
+
+                    for (BoardListener listener : listeners) {
+                        listener.selectCell(new FieldCoordinateView(currentBoard.getNumber(), j, i));
+                    }
                 }
             }
         });
     }
 
-    private JFrame zoomedBoard;
+    //-----------------------Highlighting moves-------------------//
+
+    public ArrayList<Point> getHighlightedCellsAsMove() {
+        return highlightedCellsAsMove;
+    }
+
+    private ArrayList<Point> highlightedCellsAsMove = new ArrayList<>();
+
+    public void highlightCellAsMove(Point p) {
+        highlightedCellsAsMove.add(p);
+    }
+
+    public void clearHighlightedCellsAsMove() {
+        highlightedCellsAsMove.clear();
+        repaint();
+    }
+
+    //-----------------------Highlighting attacks-------------------//
+
+    public ArrayList<Point> getHighlightedCellsAsAttack() {
+        return highlightedCellsAsAttack;
+    }
+
+    private ArrayList<Point> highlightedCellsAsAttack = new ArrayList<>();
+
+    public void highlightCellAsAttack(Point p) {
+        highlightedCellsAsAttack.add(p);
+    }
+
+    public void clearHighlightedCellsAsAttack() {
+        highlightedCellsAsAttack.clear();
+        repaint();
+    }
+
+    //-----------------------Paint-------------------//
+
+    @Override
+    public void paintComponent(Graphics g){
+        g.setColor(goldenSideColor);
+        g.fillRect(0, 0, boardSize.width, boardSize.height);
+
+        g.setColor(crimsonSideColor);
+        for(int i = 0; i < boardSize.height; i += 2 * cellSize.height){
+            for(int j = 0; j < boardSize.width; j += 2 * cellSize.width){
+                g.fillRect(j, i, cellSize.width, cellSize.height);
+            }
+        }
+
+        for(int i = cellSize.width; i < boardSize.height; i += 2 * cellSize.height){
+            for(int j = cellSize.height; j < boardSize.width; j += 2 * cellSize.width){
+                g.fillRect(j, i, cellSize.width, cellSize.height);
+            }
+        }
+
+        //-----------------------Highlighting-------------------//
+
+        g.setColor(moveHighlighting);
+        for (Point p : highlightedCellsAsMove) {
+            g.fillRect(p.x * cellSize.width, p.y * cellSize.height, cellSize.width, cellSize.height);
+        }
+
+        g.setColor(attackHighlighting);
+        for (Point p : highlightedCellsAsAttack) {
+            g.fillRect(p.x * cellSize.width, p.y * cellSize.height, cellSize.width, cellSize.height);
+        }
+    }
+
+    // Extra methods and data
+
+    private final Color goldenSideColor = TeamView.getCellColor(TeamView.CRIMSON, getNumber());
+    private final Color crimsonSideColor = TeamView.getCellColor(TeamView.GOLDEN, getNumber());
+    private final Color moveHighlighting = new Color(255, 241, 69);
+    private final Color attackHighlighting = new Color(255, 39, 35);
+
+    //private final Point position = new Point(0, 0);
+    protected final int ROWS = 8;
+    protected final int COLUMNS = 12;
+    protected final Dimension cellSize;
+    protected final Dimension boardSize;
+
+    public Dimension getBoardSize() { return boardSize; }
+
+    private FigureView[][] field;
+    {
+        field = new FigureView[ROWS][COLUMNS];
+        for (int i = 0; i < ROWS; i++)
+            for (int j = 0; j < COLUMNS; j++)
+                field[i][j] = null;
+    }
+    public FigureView getFigure(int x, int y) { return field[y][x]; }
+    public void setFigure(int x, int y, FigureView figure) { field[y][x] = figure; }
+
+    public abstract int getNumber();
+    public abstract Board clone(Dimension cellSize);
+
+    private JFrame zoomedBoard = null;
     public void addZoom() {
         zoomedBoard = new JFrame();
         zoomedBoard.setLocationRelativeTo(null);
@@ -69,68 +170,11 @@ public abstract class Board extends JPanel {
         });
     }
 
-    public ArrayList<Point> getHighlightedCellsAsMove() {
-        return highlightedCellsAsMove;
+    //-------------------------Listeners-------------------------//
+
+    public void subscribe(BoardListener listener) {
+        listeners.add(listener);
     }
 
-    private ArrayList<Point> highlightedCellsAsMove = new ArrayList<>();
-
-    public void highlightCellAsMove(Point p) {
-        highlightedCellsAsMove.add(p);
-    }
-
-    public void clearHighlightedCellsAsMove() {
-        highlightedCellsAsMove.clear();
-        repaint();
-    }
-
-    @Override
-    public void paintComponent(Graphics g){
-        g.setColor(goldenSideColor);
-        g.fillRect(0, 0, boardSize.width, boardSize.height);
-
-        g.setColor(crimsonSideColor);
-        for(int i = 0; i < boardSize.height; i += 2 * cellSize.height){
-            for(int j = 0; j < boardSize.width; j += 2 * cellSize.width){
-                g.fillRect(j, i, cellSize.width, cellSize.height);
-            }
-        }
-
-        for(int i = cellSize.width; i < boardSize.height; i += 2 * cellSize.height){
-            for(int j = cellSize.height; j < boardSize.width; j += 2 * cellSize.width){
-                g.fillRect(j, i, cellSize.width, cellSize.height);
-            }
-        }
-
-        g.setColor(moveHighlighting);
-        for (Point p : highlightedCellsAsMove) {
-            g.fillRect(p.x * cellSize.width, p.y * cellSize.height, cellSize.width, cellSize.height);
-        }
-    }
-
-    private final Color goldenSideColor = TeamView.getCellColor(TeamView.CRIMSON, getNumber());
-    private final Color crimsonSideColor = TeamView.getCellColor(TeamView.GOLDEN, getNumber());
-    private final Color moveHighlighting = new Color(255, 241, 69);
-
-    //private final Point position = new Point(0, 0);
-    protected final int ROWS = 8;
-    protected final int COLUMNS = 12;
-    protected final Dimension cellSize;
-    protected final Dimension boardSize;
-
-    public Dimension getBoardSize() { return boardSize; }
-
-    private FigureView[][] field;
-    {
-        field = new FigureView[ROWS][COLUMNS];
-        for (int i = 0; i < ROWS; i++)
-            for (int j = 0; j < COLUMNS; j++)
-                field[i][j] = null;
-    }
-    public FigureView getFigure(int x, int y) { return field[y][x]; }
-    public void setFigure(int x, int y, FigureView figure) { field[y][x] = figure; }
-
-    public abstract int getNumber();
-    public abstract Board clone(Dimension cellSize);
-
+    private ArrayList<BoardListener> listeners = new ArrayList<>();
 }

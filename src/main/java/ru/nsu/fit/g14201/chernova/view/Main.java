@@ -12,5 +12,7 @@ public class Main {
         ChessFrame frame = new ChessFrame(presenter);
         presenter.setView(frame);
         frame.setVisible(true);
+
+
     }
 }

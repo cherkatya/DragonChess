@@ -4,8 +4,7 @@ import ru.nsu.fit.g14201.chernova.model.FieldCoordinate;
 import ru.nsu.fit.g14201.chernova.presenter.Presenter;
 import ru.nsu.fit.g14201.chernova.view.ChessDragonView;
 import ru.nsu.fit.g14201.chernova.view.FieldCoordinateView;
-import ru.nsu.fit.g14201.chernova.view.utils.boards.Board;
-import ru.nsu.fit.g14201.chernova.view.utils.boards.UpperBoard;
+import ru.nsu.fit.g14201.chernova.view.utils.boards.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +13,8 @@ import java.util.List;
 /**
  * Created by SPN on 23.12.2017.
  */
-public class ChessFrame extends JFrame implements ChessDragonView {
+public class ChessFrame extends JFrame
+        implements ChessDragonView, BoardListener {
     private Color backgroundColor = Color.DARK_GRAY;
     private Dimension frameSize = new Dimension(1000,
             Toolkit.getDefaultToolkit().getScreenSize().height - 50);
@@ -31,10 +31,12 @@ public class ChessFrame extends JFrame implements ChessDragonView {
     {
         field = new Board[3];
         field[0] = new UpperBoard(boardSize);
-        field[1] = new UpperBoard(boardSize);
-        field[2] = new UpperBoard(boardSize);
-        for (int i = 0; i < 3; i++)
+        field[1] = new MiddleBoard(boardSize);
+        field[2] = new BottomBoard(boardSize);
+        for (int i = 0; i < 3; i++) {
             field[i].addZoom();
+            field[i].subscribe(this);
+        }
     }
 
     public ChessFrame(Presenter presenter) {
@@ -92,6 +94,11 @@ public class ChessFrame extends JFrame implements ChessDragonView {
     @Override
     public void tie() {
 
+    }
+
+    @Override
+    public void selectCell(FieldCoordinateView coord) {
+        presenter.selectCell(coord);
     }
 }
 

@@ -53,7 +53,7 @@ public abstract class Board extends JPanel {
                     log.debug("clicked (" + j + " x, " + i + " y)");
 
                     for (BoardListener listener : listeners) {
-                        listener.selectCell(new FieldCoordinateView(currentBoard.getNumber(), j, i));
+                        listener.selectCell(new FieldCoordinateView(currentBoard.getNumber(), j, ROWS - i - 1));
                     }
                 }
             }

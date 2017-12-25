@@ -4,6 +4,7 @@ import com.sun.istack.internal.Nullable;
 import org.apache.log4j.Logger;
 import ru.nsu.fit.g14201.chernova.view.FieldCoordinateView;
 import ru.nsu.fit.g14201.chernova.view.FigureView;
+import ru.nsu.fit.g14201.chernova.view.figures.FigureImage;
 import ru.nsu.fit.g14201.chernova.view.utils.TeamView;
 
 import javax.swing.*;
@@ -12,6 +13,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
@@ -50,7 +52,7 @@ public abstract class Board extends JPanel {
                     // clickPoint -> get FieldCoord
                     int j = (int) Math.floor(clickPoint.x * 1.0f / cellSize.width);
                     int i = (int) Math.floor(clickPoint.y * 1.0f / cellSize.height);
-                    log.debug("clicked (" + j + " x, " + i + " y)");
+                    log.debug("clicked (" + j + " x, " + (ROWS - i - 1) + " y)");
 
                     for (BoardListener listener : listeners) {
                         listener.selectCell(new FieldCoordinateView(currentBoard.getNumber(), j, ROWS - i - 1));
@@ -114,6 +116,27 @@ public abstract class Board extends JPanel {
             }
         }
 
+        g.setColor(Color.black);
+        Integer num = 8;
+        for (int i = cellSize.height; i <= boardSize.height; i += cellSize.height) {
+            int textSize = (int)26;
+            g.setFont(new Font("Serif", Font.BOLD, textSize));
+            g.drawString(num.toString(), boardSize.width + 5, i - 5);
+
+            num--;
+        }
+        g.setColor(Color.black);
+        num = 0;
+        for (int i = 0; i < boardSize.width; i += cellSize.width) {
+            int textSize = (int)26;
+            g.setFont(new Font("Serif", Font.BOLD, textSize));
+            g.drawString(new String(Character.toChars(
+                    num + Character.codePointAt("A", 0))),
+                    i + 4, boardSize.height + cellSize.height - 4);
+
+            num++;
+        }
+
         //-----------------------Highlighting-------------------//
 
         g.setColor(moveHighlighting);
@@ -172,7 +195,7 @@ public abstract class Board extends JPanel {
                 this.field.clone()
         );
         zoomedBoard.add(boardPanel);
-        zoomedBoard.setSize(boardPanel.getBoardSize());
+        zoomedBoard.setSize(boardPanel.getSize());
         zoomedBoard.setUndecorated(true);
 
         addMouseListener(new MouseAdapter() {

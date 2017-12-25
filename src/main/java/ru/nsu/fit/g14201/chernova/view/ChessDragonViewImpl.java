@@ -1,5 +1,7 @@
 package ru.nsu.fit.g14201.chernova.view;
 
+import ru.nsu.fit.g14201.chernova.utils.ChessDragonView;
+
 /**
  * Created by RARETA on 23.12.2017.
  */

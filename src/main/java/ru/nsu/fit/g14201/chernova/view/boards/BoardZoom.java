@@ -1,20 +1,30 @@
-package ru.nsu.fit.g14201.chernova.view;
+package ru.nsu.fit.g14201.chernova.view.boards;
+
+import ru.nsu.fit.g14201.chernova.utils.figures.Sylph;
+import ru.nsu.fit.g14201.chernova.view.FieldCoordinateView;
+import ru.nsu.fit.g14201.chernova.view.TeamView;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 
 /**
  * Created by SPN on 23.12.2017.
  */
-class BoardZoom extends Board {
+public abstract class BoardZoom extends Board {
+
+    public static final int CELL_SIZE = 25;
 
     private JFrame zoomedBoard = new JFrame();
 
     public BoardZoom(JFrame locateRelative) {
-        super(25);
+        super(CELL_SIZE);
+
+        //this.add(new Sylph(new FieldCoordinateView(1, 1, 1), TeamView.CRIMSON).getImage());
 
         zoomedBoard.setLocationRelativeTo(null);
         //zoomedBoard.setLocation(locateRelative.);
@@ -41,8 +51,8 @@ class BoardZoom extends Board {
                 zoomedBoard.setVisible(false);
             }
         });
-        //zoomedBoard.d
     }
 
+    public abstract int getNumber();
 
 }

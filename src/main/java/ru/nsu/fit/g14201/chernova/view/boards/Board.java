@@ -1,16 +1,20 @@
-package ru.nsu.fit.g14201.chernova.view;
+package ru.nsu.fit.g14201.chernova.view.boards;
+
+import ru.nsu.fit.g14201.chernova.utils.figures.Sylph;
+import ru.nsu.fit.g14201.chernova.view.TeamView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * Created by RARETA on 23.12.2017.
  */
-class Board extends JPanel {
-    private final Color goldenSideColor = new Color(0xffd700);
-    private final Color crimsonSideColor = new Color(220, 20, 60);
+public class Board extends JPanel {
+    private final Color goldenSideColor = TeamView.getCellColor(TeamView.CRIMSON, 0);
+    private final Color crimsonSideColor = TeamView.getCellColor(TeamView.GOLDEN, 0);
 
-    private final Point position = new Point(0, 0);
+    //private final Point position = new Point(0, 0);
     protected final int rows = 8;
     protected final int columns = 12;
     protected final int cellCommonSize;
@@ -29,9 +33,11 @@ class Board extends JPanel {
         this.size = new Dimension(columns * this.cellSize.width, rows * this.cellSize.height);
     }
 
-    public void paint(Graphics g){
+    @Override
+    public void paintComponent(Graphics g){
+        //super.paintComponent(g);
         g.setColor(goldenSideColor);
-        g.fillRect(position.x, position.y, size.width, size.height);
+        g.fillRect(0, 0, size.width, size.height);
 
         g.setColor(crimsonSideColor);
         for(int i = 0; i < size.width; i += 2 * cellSize.width){
@@ -45,5 +51,9 @@ class Board extends JPanel {
                 g.fillRect(i, j, cellSize.width, cellSize.height);
             }
         }
+
+        //new Sylph(new FieldCoordinateView(1, 1, 1), TeamView.CRIMSON).getImage().paint(g);
+
+
     }
 }

@@ -1,5 +1,6 @@
 package ru.nsu.fit.g14201.chernova.view;
 
+import ru.nsu.fit.g14201.chernova.utils.ChessDragonView;
 import ru.nsu.fit.g14201.chernova.utils.FigureView;
 import ru.nsu.fit.g14201.chernova.utils.figures.Sylph;
 import ru.nsu.fit.g14201.chernova.view.boards.Board;
@@ -9,11 +10,13 @@ import ru.nsu.fit.g14201.chernova.view.boards.UpperBoard;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by SPN on 23.12.2017.
  */
-public class ChessFrame extends JFrame {
+public class ChessFrame extends JFrame implements ChessDragonView {
     private Color backgroundColor = Color.DARK_GRAY;
     private Dimension frameSize = new Dimension(1000,
             Toolkit.getDefaultToolkit().getScreenSize().height - 50);
@@ -48,6 +51,47 @@ public class ChessFrame extends JFrame {
         add(Box.createHorizontalGlue());
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+//        List<FieldCoordinateView> posMoves = new ArrayList<>();
+//        posMoves.add(new FieldCoordinateView(1, 1, 1));
+//        showPossibleMoves(posMoves);
+    }
+
+    @Override
+    public void showPossibleMoves(List<FieldCoordinateView> possibleMoves) {
+        for (FieldCoordinateView coord : possibleMoves) {
+            field[coord.getBoard()].highlightCellAsMove(new Point(coord.getX(), coord.getY()));
+        }
+    }
+
+    @Override
+    public void showPossibleAttacks() {
+
+    }
+
+    @Override
+    public void makeMove() {
+
+    }
+
+    @Override
+    public void switchTurn() {
+
+    }
+
+    @Override
+    public void check() {
+
+    }
+
+    @Override
+    public void checkAndMate() {
+
+    }
+
+    @Override
+    public void tie() {
+
     }
 }
 

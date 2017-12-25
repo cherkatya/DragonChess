@@ -10,37 +10,13 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 /**
  * Created by RARETA on 23.12.2017.
  */
 public abstract class Board extends JPanel {
     private static Logger log = Logger.getLogger(Board.class);
-
-    private final Color goldenSideColor = TeamView.getCellColor(TeamView.CRIMSON, 0);
-    private final Color crimsonSideColor = TeamView.getCellColor(TeamView.GOLDEN, 0);
-
-    //private final Point position = new Point(0, 0);
-    protected final int ROWS = 8;
-    protected final int COLUMNS = 12;
-    protected final Dimension cellSize;
-
-    private FigureView[][] field;
-    {
-        field = new FigureView[ROWS][COLUMNS];
-        for (int i = 0; i < ROWS; i++)
-            for (int j = 0; j < COLUMNS; j++)
-                field[i][j] = null;
-    }
-    public FigureView getFigure(int x, int y) { return field[y][x]; }
-    public void setFigure(int x, int y, FigureView figure) { field[y][x] = figure; }
-
-    public Dimension getBoardSize() { return boardSize; }
-
-    public abstract int getNumber();
-    public abstract Board clone(Dimension cellSize);
-
-    protected final Dimension boardSize;
 
     public Board(Dimension cellSize) {
         this.cellSize = cellSize;
@@ -52,11 +28,15 @@ public abstract class Board extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
-                Point clickPoint = e.getPoint();
-                // clickPoint -> get FieldCoord
-                int j = (int)Math.floor(clickPoint.x * 1.0f / cellSize.width);
-                int i = (int)Math.floor(clickPoint.y * 1.0f / cellSize.height);
-                log.debug("clicked (" + j + " x, " + i + " y)");
+                if (e.getButton() == MouseEvent.BUTTON1) {
+                    clearHighlightedCellsAsMove();
+
+                    Point clickPoint = e.getPoint();
+                    // clickPoint -> get FieldCoord
+                    int j = (int) Math.floor(clickPoint.x * 1.0f / cellSize.width);
+                    int i = (int) Math.floor(clickPoint.y * 1.0f / cellSize.height);
+                    log.debug("clicked (" + j + " x, " + i + " y)");
+                }
             }
         });
     }
@@ -89,23 +69,64 @@ public abstract class Board extends JPanel {
         });
     }
 
+    private ArrayList<Point> highlightedCellsAsMove = new ArrayList<>();
+
+    public void highlightCellAsMove(Point p) {
+        highlightedCellsAsMove.add(p);
+    }
+
+    public void clearHighlightedCellsAsMove() {
+        highlightedCellsAsMove.clear();
+        repaint();
+    }
+
     @Override
     public void paintComponent(Graphics g){
         g.setColor(goldenSideColor);
         g.fillRect(0, 0, boardSize.width, boardSize.height);
 
         g.setColor(crimsonSideColor);
-        for(int i = 0; i < boardSize.width; i += 2 * cellSize.width){
-            for(int j = 0; j < boardSize.height; j += 2 * cellSize.height){
-                g.fillRect(i, j, cellSize.width, cellSize.height);
+        for(int i = 0; i < boardSize.height; i += 2 * cellSize.height){
+            for(int j = 0; j < boardSize.width; j += 2 * cellSize.width){
+                g.fillRect(j, i, cellSize.width, cellSize.height);
             }
         }
 
-        for(int i = cellSize.width; i < boardSize.width; i += 2 * cellSize.width){
-            for(int j = cellSize.height; j < boardSize.height; j += 2 * cellSize.height){
-                g.fillRect(i, j, cellSize.width, cellSize.height);
+        for(int i = cellSize.width; i < boardSize.height; i += 2 * cellSize.height){
+            for(int j = cellSize.height; j < boardSize.width; j += 2 * cellSize.width){
+                g.fillRect(j, i, cellSize.width, cellSize.height);
             }
         }
+
+        g.setColor(moveHighlighting);
+        for (Point p : highlightedCellsAsMove) {
+            g.fillRect(p.x * cellSize.width, p.y * cellSize.height, cellSize.width, cellSize.height);
+        }
     }
+
+    private final Color goldenSideColor = TeamView.getCellColor(TeamView.CRIMSON, 0);
+    private final Color crimsonSideColor = TeamView.getCellColor(TeamView.GOLDEN, 0);
+    private final Color moveHighlighting = new Color(255, 241, 69);
+
+    //private final Point position = new Point(0, 0);
+    protected final int ROWS = 8;
+    protected final int COLUMNS = 12;
+    protected final Dimension cellSize;
+    protected final Dimension boardSize;
+
+    public Dimension getBoardSize() { return boardSize; }
+
+    private FigureView[][] field;
+    {
+        field = new FigureView[ROWS][COLUMNS];
+        for (int i = 0; i < ROWS; i++)
+            for (int j = 0; j < COLUMNS; j++)
+                field[i][j] = null;
+    }
+    public FigureView getFigure(int x, int y) { return field[y][x]; }
+    public void setFigure(int x, int y, FigureView figure) { field[y][x] = figure; }
+
+    public abstract int getNumber();
+    public abstract Board clone(Dimension cellSize);
 
 }

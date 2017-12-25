@@ -68,27 +68,32 @@ public abstract class Figure {
 
     protected void addOrthogonalMoves(List<FieldCoordinate> moves, Field field, FieldCoordinate coords)
     {
+        boolean res;
         for (int i = 1; coords.getX() - i >= 0; i++)
         {
-            if (!addIfEmpty(moves, field, new FieldCoordinate(coords.getBoard(), coords.getX() - i, coords.getY())))
+            res = addIfEmpty(moves, field, new FieldCoordinate(coords.getBoard(), coords.getX() - i, coords.getY()));
+            if (!res)
                 break;
         }
 
         for (int i = 1; coords.getX() + i < 12; i++)
         {
-            if (!addIfEmpty(moves, field, new FieldCoordinate(coords.getBoard(), coords.getX() + i, coords.getY())))
+            res = addIfEmpty(moves, field, new FieldCoordinate(coords.getBoard(), coords.getX() + i, coords.getY()));
+            if (!res)
                 break;
         }
 
         for (int i = 1; coords.getY() - i >= 0; i++)
         {
-            if (!addIfEmpty(moves, field, new FieldCoordinate(coords.getBoard(), coords.getX(), coords.getY() - i)))
+            res = addIfEmpty(moves, field, new FieldCoordinate(coords.getBoard(), coords.getX(), coords.getY() - i));
+            if (!res)
                 break;
         }
 
         for (int i = 1; coords.getY() + i < 12; i++)
         {
-            if (!addIfEmpty(moves, field, new FieldCoordinate(coords.getBoard(), coords.getX(), coords.getY() + i)))
+            res = addIfEmpty(moves, field, new FieldCoordinate(coords.getBoard(), coords.getX(), coords.getY() + i));
+            if (!res)
                 break;
         }
     }

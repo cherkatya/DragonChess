@@ -15,18 +15,12 @@ import java.util.Map;
  */
 public class UpperBoard extends Board {
 
-    private Map<TeamView, ArrayList<FigureView>> figuresMap;
-
     {
-        figuresMap = new HashMap<>();
-        ArrayList<FigureView> figuresCrim = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             FigureView figure = new Sylph(new FieldCoordinateView(0, i * 2, 1),
                     TeamView.GOLDEN, cellSize);
-            figuresCrim.add(figure);
             setFigure(i * 2, 1, figure);
         }
-        figuresMap.put(TeamView.CRIMSON, figuresCrim);
     }
 
     public UpperBoard(Dimension cellSize) {
@@ -44,15 +38,5 @@ public class UpperBoard extends Board {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
-        //BufferedImage image = new Sylph(new FieldCoordinateView(1, 1, 1), TeamView.CRIMSON).getImage().image;
-        //g.drawImage(image, 40, 40, image.getWidth(), image.getHeight(), null);
-        for (Map.Entry<TeamView, ArrayList<FigureView>> entry : figuresMap.entrySet()) {
-            for (FigureView figure : entry.getValue()) {
-                FieldCoordinateView coord = figure.getCoord();
-                g.drawImage(figure.getImage(), coord.getX() * cellSize.width,
-                        coord.getY() * cellSize.height, null);
-            }
-        }
     }
 }

@@ -111,6 +111,19 @@ public abstract class Board extends JPanel {
         for (Point p : highlightedCellsAsAttack) {
             g.fillRect(p.x * cellSize.width, p.y * cellSize.height, cellSize.width, cellSize.height);
         }
+
+        //--------------------Draw figures--------------------------//
+
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLUMNS; j++) {
+                FigureView figure = field[i][j];
+                if (figure != null) {
+                    FieldCoordinateView coord = figure.getCoord();
+                    g.drawImage(figure.getImage(), coord.getX() * cellSize.width,
+                            coord.getY() * cellSize.height, null);
+                }
+            }
+        }
     }
 
     // Extra methods and data
@@ -136,7 +149,7 @@ public abstract class Board extends JPanel {
                 field[i][j] = null;
     }
     public FigureView getFigure(int x, int y) { return field[y][x]; }
-    public void setFigure(int x, int y, FigureView figure) { field[y][x] = figure; }
+    public void setFigure(int x, int y, FigureView figure) { field[y][x] = figure; repaint(); }
 
     public abstract int getNumber();
     public abstract Board clone(Dimension cellSize);

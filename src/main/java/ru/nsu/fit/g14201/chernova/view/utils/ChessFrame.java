@@ -62,6 +62,9 @@ public class ChessFrame extends JFrame
         List<FieldCoordinateView> posMoves = new ArrayList<>();
         posMoves.add(new FieldCoordinateView(0, 0, 1));
         showPossibleAttacks(new FieldCoordinateView(1, 2, 2), posMoves);
+
+        makeMove(new FieldCoordinateView(0, 0, 1),
+                new FieldCoordinateView(1, 0, 1), false);
     }
 
     @Override
@@ -80,7 +83,8 @@ public class ChessFrame extends JFrame
 
     @Override
     public void makeMove(FieldCoordinateView from, FieldCoordinateView to, boolean isAttack) {
-
+        field[to.getBoard()].setFigure(to.getX(), to.getY(), field[from.getBoard()].getFigure(from.getX(), from.getY()));
+        field[from.getBoard()].setFigure(from.getX(), from.getY(), null);
     }
 
     @Override

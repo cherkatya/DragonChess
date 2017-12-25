@@ -22,7 +22,7 @@ public class WarriorTest {
         assertEquals(1, moves.size());
 
         warrior = new Warrior(Team.CRIMSON);
-        coords = new FieldCoordinate(1,6, 11);
+        coords = new FieldCoordinate(1,6, 7);
         field.setFigure(warrior, coords);
         moves = warrior.getPossibleMoves(field, coords);
 
@@ -38,11 +38,13 @@ public class WarriorTest {
         field.setFigure(warrior, coords);
         List<FieldCoordinate> moves = warrior.getCaptureMoves(field, coords);
 
-        assertEquals(2, moves.size());
+        assertEquals(0, moves.size());
 
         warrior = new Warrior(Team.CRIMSON);
         coords = new FieldCoordinate(1,6, 11);
         field.setFigure(warrior, coords);
+        field.setFigure(new Warrior(Team.GOLDEN), new FieldCoordinate(1, 7, 10));
+        field.setFigure(new Warrior(Team.GOLDEN), new FieldCoordinate(1, 5, 10));
         moves = warrior.getCaptureMoves(field, coords);
 
         assertEquals(2, moves.size());

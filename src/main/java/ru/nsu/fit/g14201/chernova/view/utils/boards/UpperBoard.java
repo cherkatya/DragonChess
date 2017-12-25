@@ -20,9 +20,9 @@ import java.util.Map;
 public class UpperBoard extends Board {
     private static Logger log = Logger.getLogger(UpperBoard.class);
 
-    public UpperBoard(Dimension cellSize, @Nullable FigureView[][] field) {
-        super(cellSize, field);
-        if (field == null) {
+    public UpperBoard(Dimension cellSize, @Nullable FigureView[][] _field) {
+        super(cellSize, _field);
+        if (_field == null) {
             for (int i = 0; i < 6; i++) {
                 FigureView figure = new Sylph(
                         TeamView.GOLDEN, cellSize);
@@ -35,6 +35,8 @@ public class UpperBoard extends Board {
                     TeamView.GOLDEN, cellSize));
 
             setFigure(6, 0, new Dragon(TeamView.GOLDEN, cellSize));
+
+            //-------------------CRIMSON-----------------------//
 
             for (int i = 0; i < 6; i++) {
                 FigureView figure = new Sylph(

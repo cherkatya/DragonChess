@@ -22,30 +22,45 @@ public class Mage extends Figure {
         switch (coords.getBoard())
         {
             case 0:
+                addAdjacentMoves(moves, coords);
+
+                moves.add(new FieldCoordinate(1, coords.getX(), coords.getY()));
+
+                if (field.isEmpty(new FieldCoordinate(1, coords.getX(), coords.getY())))
+                    moves.add(new FieldCoordinate(2, coords.getX(), coords.getY()));
+
+                break;
             case 2:
-                moves.add(new FieldCoordinate(coords.getBoard(), coords.getX() - 1, coords.getY()));
-                moves.add(new FieldCoordinate(coords.getBoard(), coords.getX() + 1, coords.getY()));
-                moves.add(new FieldCoordinate(coords.getBoard(), coords.getX(), coords.getY() - 1));
-                moves.add(new FieldCoordinate(coords.getBoard(), coords.getX(), coords.getY() + 1));
+                addAdjacentMoves(moves, coords);
+
+                moves.add(new FieldCoordinate(1, coords.getX(), coords.getY()));
+
+                if (field.isEmpty(new FieldCoordinate(1, coords.getX(), coords.getY())))
+                    moves.add(new FieldCoordinate(0, coords.getX(), coords.getY()));
 
                 break;
             case 1:
                 addDiagonalMoves(moves, field, coords);
                 addOrthogonalMoves(moves, field, coords);
+                moves.add(new FieldCoordinate(0, coords.getX(), coords.getY()));
+                moves.add(new FieldCoordinate(2, coords.getX(), coords.getY()));
 
                 break;
             default:
                 throw new IllegalArgumentException("Illegal board number");
         }
 
-        moves.add(new FieldCoordinate(coords.getBoard() - 1, coords.getX(), coords.getY()));
-        moves.add(new FieldCoordinate(coords.getBoard() - 2, coords.getX(), coords.getY()));
-        moves.add(new FieldCoordinate(coords.getBoard() + 1, coords.getX(), coords.getY()));
-        moves.add(new FieldCoordinate(coords.getBoard() + 2, coords.getX(), coords.getY()));
-
         checkMoveValidity(moves, field, team);
 
         return moves;
+    }
+
+    private void addAdjacentMoves(List<FieldCoordinate> moves, FieldCoordinate coords)
+    {
+        moves.add(new FieldCoordinate(coords.getBoard(), coords.getX() - 1, coords.getY()));
+        moves.add(new FieldCoordinate(coords.getBoard(), coords.getX() + 1, coords.getY()));
+        moves.add(new FieldCoordinate(coords.getBoard(), coords.getX(), coords.getY() - 1));
+        moves.add(new FieldCoordinate(coords.getBoard(), coords.getX(), coords.getY() + 1));
     }
 
     public List<FieldCoordinate> getPossibleMoves(Field field, FieldCoordinate coords){

@@ -30,9 +30,8 @@ public abstract class Board extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
+                // forbide to call repaint
                 if (e.getButton() == MouseEvent.BUTTON1) {
-                    clearHighlightedCellsAsMove();
-
                     Point clickPoint = e.getPoint();
                     // clickPoint -> get FieldCoord
                     int j = (int) Math.floor(clickPoint.x * 1.0f / cellSize.width);

@@ -8,6 +8,7 @@ import ru.nsu.fit.g14201.chernova.view.utils.boards.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -57,6 +58,10 @@ public class ChessFrame extends JFrame
         add(Box.createHorizontalGlue());
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        List<FieldCoordinateView> posMoves = new ArrayList<>();
+        posMoves.add(new FieldCoordinateView(0, 0, 1));
+        showPossibleAttacks(new FieldCoordinateView(1, 2, 2), posMoves);
     }
 
     @Override
@@ -68,7 +73,9 @@ public class ChessFrame extends JFrame
 
     @Override
     public void showPossibleAttacks(FieldCoordinateView figure, List<FieldCoordinateView> possibleAttacks) {
-
+        for (FieldCoordinateView coord : possibleAttacks) {
+            field[coord.getBoard()].highlightCellAsAttack(new Point(coord.getX(), coord.getY()));
+        }
     }
 
     @Override

@@ -31,12 +31,9 @@ public class Hero extends Figure {
         {
             case 0:
             case 2:
-            {
                 moves.add(lastPosition);
                 break;
-            }
             case 1:
-            {
                 lastPosition = coords;
 
                 for (int i = 1; i <= 2; i++)
@@ -50,7 +47,6 @@ public class Hero extends Figure {
                 checkMoveValidity(moves, field, team);
 
                 break;
-            }
             default:
                 throw new IllegalArgumentException("Illegal board number");
         }

@@ -9,12 +9,12 @@ import java.awt.image.BufferedImage;
 /**
  * Created by RARETA on 23.12.2017.
  */
-public class ImagePanel extends JPanel {
+public class FigureImage {
     public BufferedImage image;
     private final String str;
     private final Color color;
 
-    public ImagePanel(String viewStr, Color color, Dimension imageSize) {
+    public FigureImage(String viewStr, Color color, Dimension imageSize) {
         this.str = viewStr;
         this.color = color;
         this.image = new BufferedImage(imageSize.width, imageSize.height,
@@ -35,13 +35,5 @@ public class ImagePanel extends JPanel {
 //            // handle exception...
 //            JOptionPane.showMessageDialog(this, "Error: can't read " + path);
 //        }
-    }
-
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        //g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-
-
     }
 }

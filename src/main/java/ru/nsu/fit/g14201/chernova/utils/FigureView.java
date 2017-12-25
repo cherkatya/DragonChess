@@ -2,7 +2,7 @@ package ru.nsu.fit.g14201.chernova.utils;
 
 import ru.nsu.fit.g14201.chernova.view.FieldCoordinateView;
 import ru.nsu.fit.g14201.chernova.view.TeamView;
-import ru.nsu.fit.g14201.chernova.utils.figures.ImagePanel;
+import ru.nsu.fit.g14201.chernova.utils.figures.FigureImage;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -11,12 +11,12 @@ import java.awt.image.BufferedImage;
  * Created by RARETA on 23.12.2017.
  */
 public abstract class FigureView {
-    private ImagePanel image;
+    private FigureImage image;
 
     public FigureView(FieldCoordinateView coord, TeamView team, Dimension size) {
         this.coord = coord;
         this.team = team;
-        image = new ImagePanel(getStringViewFigure(), TeamView.getFigureColor(team), size);
+        image = new FigureImage(getStringViewFigure(), TeamView.getFigureColor(team), size);
     }
 
     public abstract String getStringViewFigure();

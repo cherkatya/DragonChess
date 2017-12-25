@@ -7,7 +7,6 @@ import ru.nsu.fit.g14201.chernova.view.TeamView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,28 +14,34 @@ import java.util.Map;
 /**
  * Created by castiel on 25.12.2017.
  */
-public class UpperBoard extends BoardZoom {
+public class UpperBoard extends Board {
 
     private Map<TeamView, ArrayList<FigureView>> figuresMap;
+    private FigureView[][] field;
 
     {
         figuresMap = new HashMap<>();
+        field = new FigureView[ROWS][COLUMNS];
+
         ArrayList<FigureView> figuresCrim = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             figuresCrim.add(new Sylph(new FieldCoordinateView(0, i * 2, 1), TeamView.GOLDEN,
-                    new Dimension(CELL_SIZE, CELL_SIZE)));
+                    cellSize));
         }
         figuresMap.put(TeamView.CRIMSON, figuresCrim);
     }
 
-    public UpperBoard(JFrame locateRelative) {
-        super(locateRelative);
+    public UpperBoard(Dimension cellSize) {
+        super(cellSize);
     }
 
     @Override
     public int getNumber() {
         return 0;
     }
+
+    @Override
+    public Board clone(Dimension cellSize) { return new UpperBoard(cellSize); }
 
     @Override
     public void paintComponent(Graphics g) {

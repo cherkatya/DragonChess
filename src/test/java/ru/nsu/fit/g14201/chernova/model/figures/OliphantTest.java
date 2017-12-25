@@ -40,16 +40,11 @@ public class OliphantTest {
         Figure oliphant = new Oliphant(Team.GOLDEN);
         FieldCoordinate coords = new FieldCoordinate(1,6, 0);
         field.setFigure(oliphant, coords);
+        field.setFigure(new Warrior(Team.CRIMSON), new FieldCoordinate(1, 4, 0));
+        field.setFigure(new Warrior(Team.CRIMSON), new FieldCoordinate(1, 8, 0));
+        field.setFigure(new Warrior(Team.CRIMSON), new FieldCoordinate(1, 6, 5));
         List<FieldCoordinate> moves = oliphant.getCaptureMoves(field, coords);
 
-        assertEquals(0, moves.size());
-
-        oliphant = new Oliphant(Team.CRIMSON);
-        coords = new FieldCoordinate(1,0, 0);
-        field.setFigure(oliphant, coords);
-        field.setFigure(new Oliphant(Team.GOLDEN), new FieldCoordinate(1, 0, 2));
-        moves = oliphant.getCaptureMoves(field, coords);
-
-        assertEquals(2, moves.size());
+        assertEquals(3, moves.size());
     }
 }

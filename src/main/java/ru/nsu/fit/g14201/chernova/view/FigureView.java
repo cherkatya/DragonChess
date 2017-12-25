@@ -12,8 +12,8 @@ import java.awt.image.BufferedImage;
 public abstract class FigureView {
     private FigureImage image;
 
-    public FigureView(FieldCoordinateView coord, TeamView team, Dimension size) {
-        this.coord = coord;
+    public FigureView(TeamView team, Dimension size) {
+        //this.coord = coord;
         this.team = team;
         image = new FigureImage(getStringViewFigure(), TeamView.getFigureColor(team), size);
     }
@@ -28,13 +28,13 @@ public abstract class FigureView {
         return image.image;
     }
 
-    public FieldCoordinateView getCoord() {
-        return coord;
-    }
+//    public FieldCoordinateView getCoord() {
+//        return coord;
+//    }
 
-    public void setCoord(FieldCoordinateView coord) {
-        this.coord = coord;
-    }
+//    public void setCoord(FieldCoordinateView coord) {
+//        this.coord = coord;
+//    }
 
     private FieldCoordinateView coord;
 

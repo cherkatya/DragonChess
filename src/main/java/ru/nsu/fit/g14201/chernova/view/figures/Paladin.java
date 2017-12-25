@@ -16,8 +16,8 @@ import java.util.List;
  * Created by Катя on 21.12.2017.
  */
 public class Paladin extends FigureView {
-    public Paladin(FieldCoordinateView coord, TeamView team, Dimension size) {
-        super(coord, team, size);
+    public Paladin(TeamView team, Dimension size) {
+        super(team, size);
     }
 
     @Override

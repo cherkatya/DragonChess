@@ -10,8 +10,8 @@ import java.awt.*;
  * Created by RARETA on 23.12.2017.
  */
 public class Sylph extends FigureView {
-    public Sylph(FieldCoordinateView coord, TeamView team, Dimension size) {
-        super(coord, team, size);
+    public Sylph(TeamView team, Dimension size) {
+        super(team, size);
     }
 
     @Override

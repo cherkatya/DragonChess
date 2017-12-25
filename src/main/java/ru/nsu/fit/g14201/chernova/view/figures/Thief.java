@@ -16,8 +16,8 @@ import java.util.List;
  * Created by Катя on 21.12.2017.
  */
 public class Thief extends FigureView {
-    public Thief(FieldCoordinateView coord, TeamView team, Dimension size) {
-        super(coord, team, size);
+    public Thief(TeamView team, Dimension size) {
+        super(team, size);
     }
 
     @Override

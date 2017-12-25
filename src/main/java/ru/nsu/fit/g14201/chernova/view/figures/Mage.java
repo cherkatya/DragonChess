@@ -16,8 +16,8 @@ import java.util.List;
  * Created by Катя on 21.12.2017.
  */
 public class Mage extends FigureView {
-    public Mage(FieldCoordinateView coord, TeamView team, Dimension size) {
-        super(coord, team, size);
+    public Mage(TeamView team, Dimension size) {
+        super(team, size);
     }
 
     @Override

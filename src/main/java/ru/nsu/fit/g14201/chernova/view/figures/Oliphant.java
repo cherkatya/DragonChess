@@ -16,8 +16,8 @@ import java.util.List;
  * Created by Катя on 21.12.2017.
  */
 public class Oliphant extends FigureView {
-    public Oliphant(FieldCoordinateView coord, TeamView team, Dimension size) {
-        super(coord, team, size);
+    public Oliphant(TeamView team, Dimension size) {
+        super(team, size);
     }
 
     @Override

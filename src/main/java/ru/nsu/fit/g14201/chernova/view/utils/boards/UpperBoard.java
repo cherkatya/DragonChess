@@ -3,6 +3,8 @@ package ru.nsu.fit.g14201.chernova.view.utils.boards;
 import com.sun.istack.internal.Nullable;
 import org.apache.log4j.Logger;
 import ru.nsu.fit.g14201.chernova.view.FigureView;
+import ru.nsu.fit.g14201.chernova.view.figures.Dragon;
+import ru.nsu.fit.g14201.chernova.view.figures.Griffon;
 import ru.nsu.fit.g14201.chernova.view.figures.Sylph;
 import ru.nsu.fit.g14201.chernova.view.FieldCoordinateView;
 import ru.nsu.fit.g14201.chernova.view.utils.TeamView;
@@ -22,11 +24,17 @@ public class UpperBoard extends Board {
         super(cellSize, field);
         if (field == null) {
             for (int i = 0; i < 6; i++) {
-                FigureView figure = new Sylph(new FieldCoordinateView(0, i * 2, 1),
+                FigureView figure = new Sylph(
                         TeamView.GOLDEN, cellSize);
                 setFigure(i * 2, 1, figure);
             }
-            log.debug("Cell size = " + cellSize);
+
+            setFigure(2, 0, new Griffon(
+                    TeamView.GOLDEN, cellSize));
+            setFigure(10, 0, new Griffon(
+                    TeamView.GOLDEN, cellSize));
+
+            setFigure(6, 0, new Dragon(TeamView.GOLDEN, cellSize));
         }
     }
 

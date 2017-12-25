@@ -16,8 +16,8 @@ import java.util.List;
  * Created by Катя on 21.12.2017.
  */
 public class Basilisk extends FigureView {
-    public Basilisk(FieldCoordinateView coord, TeamView team, Dimension size) {
-        super(coord, team, size);
+    public Basilisk(TeamView team, Dimension size) {
+        super(team, size);
     }
 
     @Override

@@ -10,8 +10,8 @@ import java.awt.*;
  * Created by castiel on 26.12.2017.
  */
 public class Griffon extends FigureView {
-    public Griffon(FieldCoordinateView coord, TeamView team, Dimension size) {
-        super(coord, team, size);
+    public Griffon(TeamView team, Dimension size) {
+        super(team, size);
     }
 
     @Override

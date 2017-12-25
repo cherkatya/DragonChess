@@ -132,9 +132,9 @@ public abstract class Board extends JPanel {
             for (int j = 0; j < COLUMNS; j++) {
                 FigureView figure = field[i][j];
                 if (figure != null) {
-                    FieldCoordinateView coord = figure.getCoord();
-                    g.drawImage(figure.getImage(), coord.getX() * cellSize.width,
-                            coord.getY() * cellSize.height, null);
+                    //FieldCoordinateView coord = figure.getCoord();
+                    g.drawImage(figure.getImage(), j * cellSize.width,
+                            i * cellSize.height, null);
                 }
             }
         }

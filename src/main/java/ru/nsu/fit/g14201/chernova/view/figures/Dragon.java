@@ -16,8 +16,8 @@ import java.util.List;
  * Created by Катя on 21.12.2017.
  */
 public class Dragon extends FigureView {
-    public Dragon(FieldCoordinateView coord, TeamView team, Dimension size) {
-        super(coord, team, size);
+    public Dragon(TeamView team, Dimension size) {
+        super(team, size);
     }
 
     @Override

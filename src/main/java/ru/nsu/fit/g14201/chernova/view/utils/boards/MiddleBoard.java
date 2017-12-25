@@ -1,6 +1,5 @@
-package ru.nsu.fit.g14201.chernova.view.boards;
+package ru.nsu.fit.g14201.chernova.view.utils.boards;
 
-import javax.swing.*;
 import java.awt.*;
 
 /**

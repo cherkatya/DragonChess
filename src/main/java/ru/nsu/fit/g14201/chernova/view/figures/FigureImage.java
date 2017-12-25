@@ -1,7 +1,6 @@
-package ru.nsu.fit.g14201.chernova.utils.figures;
+package ru.nsu.fit.g14201.chernova.view.figures;
 
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 

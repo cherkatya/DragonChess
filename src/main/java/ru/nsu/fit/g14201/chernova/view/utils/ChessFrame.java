@@ -1,16 +1,14 @@
-package ru.nsu.fit.g14201.chernova.view;
+package ru.nsu.fit.g14201.chernova.view.utils;
 
-import ru.nsu.fit.g14201.chernova.utils.ChessDragonView;
-import ru.nsu.fit.g14201.chernova.utils.FigureView;
-import ru.nsu.fit.g14201.chernova.utils.figures.Sylph;
-import ru.nsu.fit.g14201.chernova.view.boards.Board;
-import ru.nsu.fit.g14201.chernova.view.boards.BottomBoard;
-import ru.nsu.fit.g14201.chernova.view.boards.MiddleBoard;
-import ru.nsu.fit.g14201.chernova.view.boards.UpperBoard;
+import ru.nsu.fit.g14201.chernova.model.FieldCoordinate;
+import ru.nsu.fit.g14201.chernova.presenter.Presenter;
+import ru.nsu.fit.g14201.chernova.view.ChessDragonView;
+import ru.nsu.fit.g14201.chernova.view.FieldCoordinateView;
+import ru.nsu.fit.g14201.chernova.view.utils.boards.Board;
+import ru.nsu.fit.g14201.chernova.view.utils.boards.UpperBoard;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,6 +25,7 @@ public class ChessFrame extends JFrame implements ChessDragonView {
         return field;
     }
 
+    private final Presenter presenter;
     private Board[] field;
 
     {
@@ -38,8 +37,9 @@ public class ChessFrame extends JFrame implements ChessDragonView {
             field[i].addZoom();
     }
 
-    public ChessFrame() {
+    public ChessFrame(Presenter presenter) {
         super("Dragon Chess");
+        this.presenter = presenter;
 
         setSize(frameSize);
         setLocationRelativeTo(null);    //set frame in center of screen
@@ -58,34 +58,34 @@ public class ChessFrame extends JFrame implements ChessDragonView {
     }
 
     @Override
-    public void showPossibleMoves(List<FieldCoordinateView> possibleMoves) {
+    public void showPossibleMoves(FieldCoordinateView figure, List<FieldCoordinateView> possibleMoves) {
         for (FieldCoordinateView coord : possibleMoves) {
             field[coord.getBoard()].highlightCellAsMove(new Point(coord.getX(), coord.getY()));
         }
     }
 
     @Override
-    public void showPossibleAttacks() {
+    public void showPossibleAttacks(FieldCoordinateView figure, List<FieldCoordinateView> possibleAttacks) {
 
     }
 
     @Override
-    public void makeMove() {
+    public void makeMove(FieldCoordinateView from, FieldCoordinateView to, boolean isAttack) {
 
     }
 
     @Override
-    public void switchTurn() {
+    public void switchTurnTo(TeamView team) {
 
     }
 
     @Override
-    public void check() {
+    public void check(TeamView toWhom, FieldCoordinate figureWhoMakeCheck, FieldCoordinate figureThatUnderCheck) {
 
     }
 
     @Override
-    public void checkAndMate() {
+    public void checkAndMate(TeamView toWhom, FieldCoordinate figureWhoMakeCheckAndMate, FieldCoordinate figureThatUnderCheckAndMate) {
 
     }
 

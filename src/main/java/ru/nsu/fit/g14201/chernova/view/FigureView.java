@@ -1,8 +1,7 @@
-package ru.nsu.fit.g14201.chernova.utils;
+package ru.nsu.fit.g14201.chernova.view;
 
-import ru.nsu.fit.g14201.chernova.view.FieldCoordinateView;
-import ru.nsu.fit.g14201.chernova.view.TeamView;
-import ru.nsu.fit.g14201.chernova.utils.figures.FigureImage;
+import ru.nsu.fit.g14201.chernova.view.utils.TeamView;
+import ru.nsu.fit.g14201.chernova.view.figures.FigureImage;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

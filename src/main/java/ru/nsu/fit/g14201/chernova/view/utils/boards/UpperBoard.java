@@ -1,11 +1,10 @@
-package ru.nsu.fit.g14201.chernova.view.boards;
+package ru.nsu.fit.g14201.chernova.view.utils.boards;
 
-import ru.nsu.fit.g14201.chernova.utils.FigureView;
-import ru.nsu.fit.g14201.chernova.utils.figures.Sylph;
+import ru.nsu.fit.g14201.chernova.view.FigureView;
+import ru.nsu.fit.g14201.chernova.view.figures.Sylph;
 import ru.nsu.fit.g14201.chernova.view.FieldCoordinateView;
-import ru.nsu.fit.g14201.chernova.view.TeamView;
+import ru.nsu.fit.g14201.chernova.view.utils.TeamView;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;

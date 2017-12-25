@@ -1,8 +1,8 @@
-package ru.nsu.fit.g14201.chernova.view.boards;
+package ru.nsu.fit.g14201.chernova.view.utils.boards;
 
 import org.apache.log4j.Logger;
-import ru.nsu.fit.g14201.chernova.utils.FigureView;
-import ru.nsu.fit.g14201.chernova.view.TeamView;
+import ru.nsu.fit.g14201.chernova.view.FigureView;
+import ru.nsu.fit.g14201.chernova.view.utils.TeamView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -108,8 +108,8 @@ public abstract class Board extends JPanel {
         }
     }
 
-    private final Color goldenSideColor = TeamView.getCellColor(TeamView.CRIMSON, 0);
-    private final Color crimsonSideColor = TeamView.getCellColor(TeamView.GOLDEN, 0);
+    private final Color goldenSideColor = TeamView.getCellColor(TeamView.CRIMSON, getNumber());
+    private final Color crimsonSideColor = TeamView.getCellColor(TeamView.GOLDEN, getNumber());
     private final Color moveHighlighting = new Color(255, 241, 69);
 
     //private final Point position = new Point(0, 0);

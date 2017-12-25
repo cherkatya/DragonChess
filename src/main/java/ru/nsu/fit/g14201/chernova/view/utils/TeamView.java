@@ -1,4 +1,4 @@
-package ru.nsu.fit.g14201.chernova.view;
+package ru.nsu.fit.g14201.chernova.view.utils;
 
 import java.awt.*;
 

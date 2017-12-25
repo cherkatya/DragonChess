@@ -18,6 +18,10 @@ public abstract class FigureView {
         image = new FigureImage(getStringViewFigure(), TeamView.getFigureColor(team), size);
     }
 
+    public void resizeImage(Dimension newSize) {
+        image = new FigureImage(getStringViewFigure(), TeamView.getFigureColor(team), newSize);
+    }
+
     public abstract String getStringViewFigure();
 
     public BufferedImage getImage() {

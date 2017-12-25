@@ -1,5 +1,6 @@
 package ru.nsu.fit.g14201.chernova.view.utils.boards;
 
+import com.sun.istack.internal.Nullable;
 import org.apache.log4j.Logger;
 import ru.nsu.fit.g14201.chernova.view.FieldCoordinateView;
 import ru.nsu.fit.g14201.chernova.view.FigureView;
@@ -19,10 +20,23 @@ import java.util.ArrayList;
 public abstract class Board extends JPanel {
     private static Logger log = Logger.getLogger(Board.class);
 
-    public Board(Dimension cellSize) {
+    private Board(Dimension cellSize) {
         this.cellSize = cellSize;
-        //log.debug(cellSize);
-        this.boardSize = new Dimension(COLUMNS * this.cellSize.width, ROWS * this.cellSize.height);
+        this.boardSize = new Dimension(COLUMNS * this.cellSize.width,
+                ROWS * this.cellSize.height);
+    }
+
+    public Board(Dimension cellSize, @Nullable FigureView[][] _field) {
+        this(cellSize);
+
+        if (_field == null) {
+            this.field = new FigureView[ROWS][COLUMNS];
+            for (int i = 0; i < ROWS; i++)
+                for (int j = 0; j < COLUMNS; j++)
+                    this.field[i][j] = null;
+        }
+        else
+            this.field = _field;
 
         Board currentBoard = this;
         addMouseListener(new MouseAdapter() {
@@ -142,23 +156,21 @@ public abstract class Board extends JPanel {
     public Dimension getBoardSize() { return boardSize; }
 
     private FigureView[][] field;
-    {
-        field = new FigureView[ROWS][COLUMNS];
-        for (int i = 0; i < ROWS; i++)
-            for (int j = 0; j < COLUMNS; j++)
-                field[i][j] = null;
-    }
+
     public FigureView getFigure(int x, int y) { return field[y][x]; }
     public void setFigure(int x, int y, FigureView figure) { field[y][x] = figure; repaint(); }
 
     public abstract int getNumber();
-    public abstract Board clone(Dimension cellSize);
+    public abstract Board clone(Dimension cellSize, @Nullable FigureView[][] field);
 
     private JFrame zoomedBoard = null;
     public void addZoom() {
         zoomedBoard = new JFrame();
         zoomedBoard.setLocationRelativeTo(null);
-        Board boardPanel = this.clone(new Dimension(cellSize.width * 2, cellSize.height * 2));
+        Board boardPanel = this.clone(
+                new Dimension(cellSize.width * 2, cellSize.height * 2),
+                this.field.clone()
+        );
         zoomedBoard.add(boardPanel);
         zoomedBoard.setSize(boardPanel.getBoardSize());
         zoomedBoard.setUndecorated(true);

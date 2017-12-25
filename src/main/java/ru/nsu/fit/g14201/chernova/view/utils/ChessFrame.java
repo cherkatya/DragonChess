@@ -31,11 +31,11 @@ public class ChessFrame extends JFrame
 
     {
         field = new Board[3];
-        field[0] = new UpperBoard(boardSize);
-        field[1] = new MiddleBoard(boardSize);
-        field[2] = new BottomBoard(boardSize);
+        field[0] = new UpperBoard(boardSize, null);
+        field[1] = new MiddleBoard(boardSize, null);
+        field[2] = new BottomBoard(boardSize, null);
         for (int i = 0; i < 3; i++) {
-            field[i].addZoom();
+           // field[i].addZoom();
             field[i].subscribe(this);
         }
     }

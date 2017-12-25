@@ -7,15 +7,15 @@ import ru.nsu.fit.g14201.chernova.view.utils.TeamView;
 import java.awt.*;
 
 /**
- * Created by RARETA on 23.12.2017.
+ * Created by castiel on 26.12.2017.
  */
-public class Sylph extends FigureView {
-    public Sylph(FieldCoordinateView coord, TeamView team, Dimension size) {
+public class Griffon extends FigureView {
+    public Griffon(FieldCoordinateView coord, TeamView team, Dimension size) {
         super(coord, team, size);
     }
 
     @Override
     public String getStringViewFigure() {
-        return "S";
+        return "G";
     }
 }

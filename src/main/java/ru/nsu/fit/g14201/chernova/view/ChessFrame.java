@@ -23,6 +23,10 @@ public class ChessFrame extends JFrame implements ChessDragonView {
     private final int CELL_SIZE = 25;
     private Dimension boardSize = new Dimension(CELL_SIZE, CELL_SIZE);
 
+    public Board[] getField() {
+        return field;
+    }
+
     private Board[] field;
 
     {
@@ -51,10 +55,6 @@ public class ChessFrame extends JFrame implements ChessDragonView {
         add(Box.createHorizontalGlue());
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-//        List<FieldCoordinateView> posMoves = new ArrayList<>();
-//        posMoves.add(new FieldCoordinateView(1, 1, 1));
-//        showPossibleMoves(posMoves);
     }
 
     @Override

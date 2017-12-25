@@ -69,6 +69,10 @@ public abstract class Board extends JPanel {
         });
     }
 
+    public ArrayList<Point> getHighlightedCellsAsMove() {
+        return highlightedCellsAsMove;
+    }
+
     private ArrayList<Point> highlightedCellsAsMove = new ArrayList<>();
 
     public void highlightCellAsMove(Point p) {

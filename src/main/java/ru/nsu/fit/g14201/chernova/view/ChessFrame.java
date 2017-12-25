@@ -21,10 +21,7 @@ public class ChessFrame extends JFrame {
     public ChessFrame() {
         super("Dragon Chess");
 
-        //setBackground(backgroundColor);
-        //setForeground(backgroundColor);
         setSize(frameSize);
-        //setExtendedState(JFrame.MAXIMIZED_VERT);
         setLocationRelativeTo(null);    //set frame in center of screen
         setLayout(new GridLayout(3, 3, 0, 0));
         add(Box.createHorizontalGlue());

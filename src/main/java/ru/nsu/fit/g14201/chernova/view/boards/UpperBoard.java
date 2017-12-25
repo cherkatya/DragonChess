@@ -22,8 +22,10 @@ public class UpperBoard extends BoardZoom {
     {
         figuresMap = new HashMap<>();
         ArrayList<FigureView> figuresCrim = new ArrayList<>();
-        figuresCrim.add(new Sylph(new FieldCoordinateView(0, 0, 1), TeamView.GOLDEN,
-                new Dimension(CELL_SIZE, CELL_SIZE)));
+        for (int i = 0; i < 6; i++) {
+            figuresCrim.add(new Sylph(new FieldCoordinateView(0, i * 2, 1), TeamView.GOLDEN,
+                    new Dimension(CELL_SIZE, CELL_SIZE)));
+        }
         figuresMap.put(TeamView.CRIMSON, figuresCrim);
     }
 

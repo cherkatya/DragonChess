@@ -24,7 +24,8 @@ public class ImagePanel extends JPanel {
         Graphics2D g2 = (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setFont(new Font("Serif", Font.PLAIN, 32));
+        int textSize = (int)(imageSize.width * ((str.length() <= 1) ? (32.0f / 25.0f) : (21.0f / 25.0f)));
+        g2.setFont(new Font("Serif", Font.PLAIN, textSize));
         g2.setColor(this.color);
         g2.drawString(str, 2, image.getHeight() - 1);
 

@@ -1,6 +1,5 @@
 package ru.nsu.fit.g14201.chernova.utils.figures;
 
-import ru.nsu.fit.g14201.chernova.view.boards.BoardZoom;
 
 import javax.swing.*;
 import java.awt.*;

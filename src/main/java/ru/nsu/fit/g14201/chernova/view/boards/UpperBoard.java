@@ -17,16 +17,15 @@ import java.util.Map;
 public class UpperBoard extends Board {
 
     private Map<TeamView, ArrayList<FigureView>> figuresMap;
-    private FigureView[][] field;
 
     {
         figuresMap = new HashMap<>();
-        field = new FigureView[ROWS][COLUMNS];
-
         ArrayList<FigureView> figuresCrim = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-            figuresCrim.add(new Sylph(new FieldCoordinateView(0, i * 2, 1), TeamView.GOLDEN,
-                    cellSize));
+            FigureView figure = new Sylph(new FieldCoordinateView(0, i * 2, 1),
+                    TeamView.GOLDEN, cellSize);
+            figuresCrim.add(figure);
+            setFigure(i * 2, 1, figure);
         }
         figuresMap.put(TeamView.CRIMSON, figuresCrim);
     }

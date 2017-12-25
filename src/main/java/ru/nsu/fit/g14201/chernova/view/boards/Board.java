@@ -1,6 +1,7 @@
 package ru.nsu.fit.g14201.chernova.view.boards;
 
 import org.apache.log4j.Logger;
+import ru.nsu.fit.g14201.chernova.utils.FigureView;
 import ru.nsu.fit.g14201.chernova.view.TeamView;
 
 import javax.swing.*;
@@ -24,6 +25,16 @@ public abstract class Board extends JPanel {
     protected final int COLUMNS = 12;
     protected final Dimension cellSize;
 
+    private FigureView[][] field;
+    {
+        field = new FigureView[ROWS][COLUMNS];
+        for (int i = 0; i < ROWS; i++)
+            for (int j = 0; j < COLUMNS; j++)
+                field[i][j] = null;
+    }
+    public FigureView getFigure(int x, int y) { return field[y][x]; }
+    public void setFigure(int x, int y, FigureView figure) { field[y][x] = figure; }
+
     public Dimension getBoardSize() { return boardSize; }
 
     public abstract int getNumber();
@@ -33,7 +44,7 @@ public abstract class Board extends JPanel {
 
     public Board(Dimension cellSize) {
         this.cellSize = cellSize;
-        log.debug(cellSize);
+        //log.debug(cellSize);
         this.boardSize = new Dimension(COLUMNS * this.cellSize.width, ROWS * this.cellSize.height);
 
         addMouseListener(new MouseAdapter() {
@@ -41,6 +52,11 @@ public abstract class Board extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
+                Point clickPoint = e.getPoint();
+                // clickPoint -> get FieldCoord
+                int j = (int)Math.floor(clickPoint.x * 1.0f / cellSize.width);
+                int i = (int)Math.floor(clickPoint.y * 1.0f / cellSize.height);
+                log.debug("clicked (" + j + " x, " + i + " y)");
             }
         });
     }

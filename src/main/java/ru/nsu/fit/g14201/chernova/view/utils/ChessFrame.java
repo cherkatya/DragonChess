@@ -59,12 +59,12 @@ public class ChessFrame extends JFrame
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        List<FieldCoordinateView> posMoves = new ArrayList<>();
-        posMoves.add(new FieldCoordinateView(0, 0, 1));
-        showPossibleAttacks(new FieldCoordinateView(1, 2, 2), posMoves);
+        // TODO: move to test
+//        List<FieldCoordinateView> posMoves = new ArrayList<>();
+//        posMoves.add(new FieldCoordinateView(0, 0, 1));
+//        showPossibleAttacks(new FieldCoordinateView(1, 2, 2), posMoves);
+//
 
-        makeMove(new FieldCoordinateView(0, 0, 1),
-                new FieldCoordinateView(1, 0, 1), false);
     }
 
     @Override

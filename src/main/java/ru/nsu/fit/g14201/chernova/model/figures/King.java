@@ -23,13 +23,10 @@ public class King extends Figure {
         {
             case 0:
             case 2:
-            {
                 moves.add(new FieldCoordinate(1, coords.getX(), coords.getY()));
 
                 break;
-            }
             case 1:
-            {
                 moves.add(new FieldCoordinate(1, coords.getX() - 1, coords.getY()));
                 moves.add(new FieldCoordinate(1, coords.getX() + 1, coords.getY()));
                 moves.add(new FieldCoordinate(1, coords.getX(), coords.getY() - 1));
@@ -45,7 +42,6 @@ public class King extends Figure {
                 checkMoveValidity(moves, field, team);
 
                 break;
-            }
             default:
                 throw new IllegalArgumentException("Illegal board number");
         }

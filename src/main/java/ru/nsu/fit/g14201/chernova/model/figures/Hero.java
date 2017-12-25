@@ -20,7 +20,7 @@ public class Hero extends Figure {
     }
 
     private List<FieldCoordinate> getMoves(Field field, FieldCoordinate coords){
-        if ((coords.getBoard() != 1) && (lastPosition != null))
+        if ((coords.getBoard() != 1) && (lastPosition == null))
         {
             throw new IllegalArgumentException("Hero appeared on the edge board by illegal means");
         }
@@ -36,13 +36,18 @@ public class Hero extends Figure {
             case 1:
                 lastPosition = coords;
 
-                for (int i = 1; i <= 2; i++)
+                for (int i = 0; i <= 2; i++)
                 {
-                    moves.add(new FieldCoordinate(1, coords.getX() - i, coords.getY() - i));
-                    moves.add(new FieldCoordinate(1, coords.getX() - i, coords.getY() + i));
-                    moves.add(new FieldCoordinate(1, coords.getX() + i, coords.getY() - i));
-                    moves.add(new FieldCoordinate(1, coords.getX() + i, coords.getY() + i));
+                    moves.add(new FieldCoordinate(i, coords.getX() - 1, coords.getY() - 1));
+                    moves.add(new FieldCoordinate(i, coords.getX() - 1, coords.getY() + 1));
+                    moves.add(new FieldCoordinate(i, coords.getX() + 1, coords.getY() - 1));
+                    moves.add(new FieldCoordinate(i, coords.getX() + 1, coords.getY() + 1));
                 }
+
+                moves.add(new FieldCoordinate(1, coords.getX() - 2, coords.getY() - 2));
+                moves.add(new FieldCoordinate(1, coords.getX() - 2, coords.getY() + 2));
+                moves.add(new FieldCoordinate(1, coords.getX() + 2, coords.getY() - 2));
+                moves.add(new FieldCoordinate(1, coords.getX() + 2, coords.getY() + 2));
 
                 checkMoveValidity(moves, field, team);
 

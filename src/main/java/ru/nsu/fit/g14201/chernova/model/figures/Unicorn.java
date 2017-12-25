@@ -16,14 +16,40 @@ public class Unicorn extends Figure {
         super(team);
     }
 
-    public List<FieldCoordinate> getPossibleMoves(Field field, FieldCoordinate coords){
-        List<FieldCoordinate> possibleMoves = new ArrayList<>();
+    public List<FieldCoordinate> getMoves(Field field, FieldCoordinate coords){
+        if (coords.getBoard() != 1)
+        {
+            throw new IllegalArgumentException("Unicorn can't be on this board");
+        }
 
-        return possibleMoves;
+        List<FieldCoordinate> moves = new ArrayList<>();
+
+        moves.add(new FieldCoordinate(1, coords.getX() - 1, coords.getY() - 2));
+        moves.add(new FieldCoordinate(1, coords.getX() - 1, coords.getY() + 2));
+        moves.add(new FieldCoordinate(1, coords.getX() + 1, coords.getY() - 2));
+        moves.add(new FieldCoordinate(1, coords.getX() + 1, coords.getY() + 2));
+        moves.add(new FieldCoordinate(1, coords.getX() - 2, coords.getY() - 1));
+        moves.add(new FieldCoordinate(1, coords.getX() - 2, coords.getY() + 1));
+        moves.add(new FieldCoordinate(1, coords.getX() + 2, coords.getY() - 1));
+        moves.add(new FieldCoordinate(1, coords.getX() + 2, coords.getY() + 1));
+
+        checkMoveValidity(moves, field, team);
+
+        return moves;
+    }
+
+    public List<FieldCoordinate> getPossibleMoves(Field field, FieldCoordinate coords){
+        List<FieldCoordinate> moves = new ArrayList<>();
+
+        checkPossibilityMoves(moves, field);
+
+        return moves;
     }
     public List<FieldCoordinate> getCaptureMoves(Field field, FieldCoordinate coords){
-        List<FieldCoordinate> captureMoves = new ArrayList<>();
+        List<FieldCoordinate> moves = new ArrayList<>();
 
-        return captureMoves;
+        checkCaptureMoves(moves, field);
+
+        return moves;
     }
 }

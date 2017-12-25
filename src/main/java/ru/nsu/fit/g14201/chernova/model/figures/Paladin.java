@@ -16,14 +16,64 @@ public class Paladin extends Figure {
         super(team);
     }
 
-    public List<FieldCoordinate> getPossibleMoves(Field field, FieldCoordinate coords){
-        List<FieldCoordinate> possibleMoves = new ArrayList<>();
+    private List<FieldCoordinate> getMoves(Field field, FieldCoordinate coords){
+        List<FieldCoordinate> moves = new ArrayList<>();
 
-        return possibleMoves;
+        moves.add(new FieldCoordinate(coords.getBoard(), coords.getX() - 1, coords.getY()));
+        moves.add(new FieldCoordinate(coords.getBoard(), coords.getX() + 1, coords.getY()));
+        moves.add(new FieldCoordinate(coords.getBoard(), coords.getX(), coords.getY() - 1));
+        moves.add(new FieldCoordinate(coords.getBoard(), coords.getX(), coords.getY() + 1));
+        moves.add(new FieldCoordinate(coords.getBoard(), coords.getX() - 1, coords.getY() - 1));
+        moves.add(new FieldCoordinate(coords.getBoard(), coords.getX() - 1, coords.getY() + 1));
+        moves.add(new FieldCoordinate(coords.getBoard(), coords.getX() + 1, coords.getY() - 1));
+        moves.add(new FieldCoordinate(coords.getBoard(), coords.getX() + 1, coords.getY() + 1));
+
+        if (coords.getBoard() == 1)
+        {
+            moves.add(new FieldCoordinate(coords.getBoard(), coords.getX() - 1, coords.getY() - 2));
+            moves.add(new FieldCoordinate(coords.getBoard(), coords.getX() - 1, coords.getY() + 2));
+            moves.add(new FieldCoordinate(coords.getBoard(), coords.getX() - 2, coords.getY() - 1));
+            moves.add(new FieldCoordinate(coords.getBoard(), coords.getX() - 2, coords.getY() + 1));
+            moves.add(new FieldCoordinate(coords.getBoard(), coords.getX() + 1, coords.getY() - 2));
+            moves.add(new FieldCoordinate(coords.getBoard(), coords.getX() + 1, coords.getY() + 2));
+            moves.add(new FieldCoordinate(coords.getBoard(), coords.getX() + 2, coords.getY() - 1));
+            moves.add(new FieldCoordinate(coords.getBoard(), coords.getX() + 2, coords.getY() + 1));
+        }
+
+        moves.add(new FieldCoordinate(coords.getBoard() - 1, coords.getX() - 2, coords.getY()));
+        moves.add(new FieldCoordinate(coords.getBoard() - 1, coords.getX() + 2, coords.getY()));
+        moves.add(new FieldCoordinate(coords.getBoard() - 1, coords.getX(), coords.getY() - 2));
+        moves.add(new FieldCoordinate(coords.getBoard() - 1, coords.getX(), coords.getY() + 2));
+        moves.add(new FieldCoordinate(coords.getBoard() + 1, coords.getX() - 2, coords.getY()));
+        moves.add(new FieldCoordinate(coords.getBoard() + 1, coords.getX() + 2, coords.getY()));
+        moves.add(new FieldCoordinate(coords.getBoard() + 1, coords.getX(), coords.getY() - 2));
+        moves.add(new FieldCoordinate(coords.getBoard() + 1, coords.getX(), coords.getY() + 2));
+        moves.add(new FieldCoordinate(coords.getBoard() - 2, coords.getX() - 1, coords.getY()));
+        moves.add(new FieldCoordinate(coords.getBoard() - 2, coords.getX() + 1, coords.getY()));
+        moves.add(new FieldCoordinate(coords.getBoard() - 2, coords.getX(), coords.getY() - 1));
+        moves.add(new FieldCoordinate(coords.getBoard() - 2, coords.getX(), coords.getY() + 1));
+        moves.add(new FieldCoordinate(coords.getBoard() + 2, coords.getX() - 1, coords.getY()));
+        moves.add(new FieldCoordinate(coords.getBoard() + 2, coords.getX() + 1, coords.getY()));
+        moves.add(new FieldCoordinate(coords.getBoard() + 2, coords.getX(), coords.getY() - 1));
+        moves.add(new FieldCoordinate(coords.getBoard() + 2, coords.getX(), coords.getY() + 1));
+
+        checkMoveValidity(moves, field, team);
+
+        return moves;
+    }
+
+    public List<FieldCoordinate> getPossibleMoves(Field field, FieldCoordinate coords){
+        List<FieldCoordinate> moves = getMoves(field, coords);
+
+        checkPossibilityMoves(moves, field);
+
+        return moves;
     }
     public List<FieldCoordinate> getCaptureMoves(Field field, FieldCoordinate coords){
-        List<FieldCoordinate> captureMoves = new ArrayList<>();
+        List<FieldCoordinate> moves = getMoves(field, coords);
 
-        return captureMoves;
+        checkCaptureMoves(moves, field);
+
+        return moves;
     }
 }

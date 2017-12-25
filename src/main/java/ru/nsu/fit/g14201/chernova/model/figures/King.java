@@ -16,14 +16,56 @@ public class King extends Figure {
         super(team);
     }
 
-    public List<FieldCoordinate> getPossibleMoves(Field field, FieldCoordinate coords){
-        List<FieldCoordinate> possibleMoves = new ArrayList<>();
+    private List<FieldCoordinate> getMoves(Field field, FieldCoordinate coords){
+        List<FieldCoordinate> moves = new ArrayList<>();
 
-        return possibleMoves;
+        switch (coords.getBoard())
+        {
+            case 0:
+            case 2:
+            {
+                moves.add(new FieldCoordinate(1, coords.getX(), coords.getY()));
+
+                break;
+            }
+            case 1:
+            {
+                moves.add(new FieldCoordinate(1, coords.getX() - 1, coords.getY()));
+                moves.add(new FieldCoordinate(1, coords.getX() + 1, coords.getY()));
+                moves.add(new FieldCoordinate(1, coords.getX(), coords.getY() - 1));
+                moves.add(new FieldCoordinate(1, coords.getX(), coords.getY() + 1));
+                moves.add(new FieldCoordinate(1, coords.getX() - 1, coords.getY() - 1));
+                moves.add(new FieldCoordinate(1, coords.getX() - 1, coords.getY() + 1));
+                moves.add(new FieldCoordinate(1, coords.getX() + 1, coords.getY() - 1));
+                moves.add(new FieldCoordinate(1, coords.getX() + 1, coords.getY() + 1));
+
+                moves.add(new FieldCoordinate(0, coords.getX(), coords.getY()));
+                moves.add(new FieldCoordinate(2, coords.getX(), coords.getY()));
+
+                checkMoveValidity(moves, field, team);
+
+                break;
+            }
+            default:
+                throw new IllegalArgumentException("Illegal board number");
+        }
+
+        return moves;
     }
-    public List<FieldCoordinate> getCaptureMoves(Field field, FieldCoordinate coords){
-        List<FieldCoordinate> captureMoves = new ArrayList<>();
 
-        return captureMoves;
+    public List<FieldCoordinate> getPossibleMoves(Field field, FieldCoordinate coords){
+        List<FieldCoordinate> moves = getMoves(field, coords);
+
+        checkPossibilityMoves(moves, field);
+
+        return moves;
+    }
+
+    public List<FieldCoordinate> getCaptureMoves(Field field, FieldCoordinate coords){
+        List<FieldCoordinate> moves = getMoves(field, coords);
+
+        checkCaptureMoves(moves, field);
+
+        return moves;
     }
 }

@@ -16,13 +16,37 @@ public class Cleric extends Figure {
         super(team);
     }
 
+    private List<FieldCoordinate> getMoves(FieldCoordinate coords, Field field){
+        List<FieldCoordinate> moves = new ArrayList<>();
+
+        moves.add(new FieldCoordinate(coords.getBoard(), coords.getX() - 1, coords.getY()));
+        moves.add(new FieldCoordinate(coords.getBoard(), coords.getX() + 1, coords.getY()));
+        moves.add(new FieldCoordinate(coords.getBoard(), coords.getX(), coords.getY() - 1));
+        moves.add(new FieldCoordinate(coords.getBoard(), coords.getX(), coords.getY() + 1));
+        moves.add(new FieldCoordinate(coords.getBoard(), coords.getX() - 1, coords.getY() - 1));
+        moves.add(new FieldCoordinate(coords.getBoard(), coords.getX() - 1, coords.getY() + 1));
+        moves.add(new FieldCoordinate(coords.getBoard(), coords.getX() + 1, coords.getY() - 1));
+        moves.add(new FieldCoordinate(coords.getBoard(), coords.getX() + 1, coords.getY() + 1));
+        moves.add(new FieldCoordinate(coords.getBoard() - 1, coords.getX(), coords.getY()));
+        moves.add(new FieldCoordinate(coords.getBoard() + 1, coords.getX(), coords.getY()));
+
+        checkMoveValidity(moves, field, team);
+
+        return moves;
+    }
+
     public List<FieldCoordinate> getPossibleMoves(Field field, FieldCoordinate coords){
-        List<FieldCoordinate> possibleMoves = new ArrayList<>();
+        List<FieldCoordinate> possibleMoves = getMoves(coords, field);
+
+        checkPossibilityMoves(possibleMoves, field);
 
         return possibleMoves;
     }
+
     public List<FieldCoordinate> getCaptureMoves(Field field, FieldCoordinate coords){
-        List<FieldCoordinate> captureMoves = new ArrayList<>();
+        List<FieldCoordinate> captureMoves = getMoves(coords, field);
+
+        checkCaptureMoves(captureMoves, field);
 
         return captureMoves;
     }

@@ -26,7 +26,7 @@ public class WarriorTest {
         field.setFigure(warrior, coords);
         moves = warrior.getPossibleMoves(field, coords);
 
-        assertEquals(2, moves.size());
+        assertEquals(1, moves.size());
     }
 
     @Test

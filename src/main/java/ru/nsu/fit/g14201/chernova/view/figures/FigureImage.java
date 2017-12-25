@@ -22,10 +22,16 @@ public class FigureImage {
         Graphics2D g2 = (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
-        int textSize = (int)(imageSize.width * ((str.length() <= 1) ? (32.0f / 25.0f) : (21.0f / 25.0f)));
+        int textSize = (int)(imageSize.width * ((str.length() <= 1) ? (26 / 25.0f) : (18.0f / 25.0f)));
         g2.setFont(new Font("Serif", Font.PLAIN, textSize));
         g2.setColor(this.color);
-        g2.drawString(str, 2, image.getHeight() - 1);
+        g2.fillOval(1, 1, image.getWidth() - 2, image.getHeight() - 2);
+        g2.setColor(Color.BLACK);
+        g2.drawOval(1, 1, image.getWidth() - 2, image.getHeight() - 2);
+        g2.setColor(Color.BLACK);
+        int shiftX = (int)(imageSize.width * ((str.length() <= 1) ? 0.2f : 0.15f));
+        int shiftY = (int)(imageSize.height * ((str.length() <= 1) ? 0.1f : 0.2f));
+        g2.drawString(str, shiftX, image.getHeight() - 1 - shiftY);
 
 //        try {
 //            image = ImageIO.read(new File(path));

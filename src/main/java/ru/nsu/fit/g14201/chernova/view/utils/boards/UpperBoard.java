@@ -35,6 +35,19 @@ public class UpperBoard extends Board {
                     TeamView.GOLDEN, cellSize));
 
             setFigure(6, 0, new Dragon(TeamView.GOLDEN, cellSize));
+
+            for (int i = 0; i < 6; i++) {
+                FigureView figure = new Sylph(
+                        TeamView.CRIMSON, cellSize);
+                setFigure(i * 2, 7 - 1, figure);
+            }
+
+            setFigure(2, 7 - 0, new Griffon(
+                    TeamView.CRIMSON, cellSize));
+            setFigure(10, 7 - 0, new Griffon(
+                    TeamView.CRIMSON, cellSize));
+
+            setFigure(6, 7 - 0, new Dragon(TeamView.CRIMSON, cellSize));
         }
     }
 

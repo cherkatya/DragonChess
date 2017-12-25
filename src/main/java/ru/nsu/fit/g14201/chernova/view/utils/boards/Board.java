@@ -145,7 +145,7 @@ public abstract class Board extends JPanel {
     private final Color goldenSideColor = TeamView.getCellColor(TeamView.CRIMSON, getNumber());
     private final Color crimsonSideColor = TeamView.getCellColor(TeamView.GOLDEN, getNumber());
     private final Color moveHighlighting = new Color(255, 241, 69);
-    private final Color attackHighlighting = new Color(255, 39, 35);
+    private final Color attackHighlighting = new Color(8, 210, 213);
 
     //private final Point position = new Point(0, 0);
     protected final int ROWS = 8;

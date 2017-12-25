@@ -13,27 +13,27 @@ public abstract class Figure {
         this.team = team;
     }
 
-    protected void checkMoveValidity(List<FieldCoordinate> moves, Field field, Team team){
+    protected void checkMoveValidity(List<FieldCoordinate> moves, Field field, Team team){ //TODO static?
         //bounds
-        for (Iterator<FieldCoordinate> iterator = moves.iterator(); iterator.hasNext(); ){
+        for (Iterator<FieldCoordinate> iterator = moves.iterator(); iterator.hasNext(); ){ //TODO replace with Collection.removeif ?
             FieldCoordinate coord = iterator.next();
             if (coord.getBoard() > 2 || coord.getBoard() < 0 || coord.getY() < 0 || coord.getY() >= 8 || coord.getX() < 0 || coord.getX() >= 12)
                 iterator.remove();
         }
 
         //team
-        for (Iterator<FieldCoordinate> iterator = moves.iterator(); iterator.hasNext(); ){
+        for (Iterator<FieldCoordinate> iterator = moves.iterator(); iterator.hasNext(); ){ //TODO replace with Collection.removeif ?
             FieldCoordinate coords = iterator.next();
             if(!field.isEmpty(coords) && field.getFigure(coords).getTeam() == team)
                 iterator.remove();
         }
     }
-    protected void checkPossibilityMoves(List<FieldCoordinate> possibleMoves, Field field){
+    protected void checkPossibilityMoves(List<FieldCoordinate> possibleMoves, Field field){ //TODO static?
         for (Iterator<FieldCoordinate> iterator = possibleMoves.iterator(); iterator.hasNext(); )
             if(!field.isEmpty(iterator.next()))
                 iterator.remove();
     }
-    protected void checkCaptureMoves(List<FieldCoordinate> captureMoves, Field field){
+    protected void checkCaptureMoves(List<FieldCoordinate> captureMoves, Field field){ //TODO static?
         for (Iterator<FieldCoordinate> iterator = captureMoves.iterator(); iterator.hasNext(); )
             if(field.isEmpty(iterator.next()))
                 iterator.remove();

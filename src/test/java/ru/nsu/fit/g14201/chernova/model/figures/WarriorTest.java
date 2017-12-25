@@ -41,10 +41,10 @@ public class WarriorTest {
         assertEquals(0, moves.size());
 
         warrior = new Warrior(Team.CRIMSON);
-        coords = new FieldCoordinate(1,6, 11);
+        coords = new FieldCoordinate(1,6, 5);
         field.setFigure(warrior, coords);
-        field.setFigure(new Warrior(Team.GOLDEN), new FieldCoordinate(1, 7, 10));
-        field.setFigure(new Warrior(Team.GOLDEN), new FieldCoordinate(1, 5, 10));
+        field.setFigure(new Warrior(Team.GOLDEN), new FieldCoordinate(1, 7, 4));
+        field.setFigure(new Warrior(Team.GOLDEN), new FieldCoordinate(1, 5, 4));
         moves = warrior.getCaptureMoves(field, coords);
 
         assertEquals(2, moves.size());

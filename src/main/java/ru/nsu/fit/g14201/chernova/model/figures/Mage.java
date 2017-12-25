@@ -28,11 +28,6 @@ public class Mage extends Figure {
                 moves.add(new FieldCoordinate(coords.getBoard(), coords.getX(), coords.getY() - 1));
                 moves.add(new FieldCoordinate(coords.getBoard(), coords.getX(), coords.getY() + 1));
 
-                moves.add(new FieldCoordinate(coords.getBoard() - 1, coords.getX(), coords.getY()));
-                moves.add(new FieldCoordinate(coords.getBoard() - 2, coords.getX(), coords.getY()));
-                moves.add(new FieldCoordinate(coords.getBoard() + 1, coords.getX(), coords.getY()));
-                moves.add(new FieldCoordinate(coords.getBoard() + 2, coords.getX(), coords.getY()));
-
                 break;
             case 1:
                 addDiagonalMoves(moves, field, coords);
@@ -42,6 +37,11 @@ public class Mage extends Figure {
             default:
                 throw new IllegalArgumentException("Illegal board number");
         }
+
+        moves.add(new FieldCoordinate(coords.getBoard() - 1, coords.getX(), coords.getY()));
+        moves.add(new FieldCoordinate(coords.getBoard() - 2, coords.getX(), coords.getY()));
+        moves.add(new FieldCoordinate(coords.getBoard() + 1, coords.getX(), coords.getY()));
+        moves.add(new FieldCoordinate(coords.getBoard() + 2, coords.getX(), coords.getY()));
 
         checkMoveValidity(moves, field, team);
 
